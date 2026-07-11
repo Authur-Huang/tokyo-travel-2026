@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>東京 6 天 5 夜親子高 CP 值自由行指南</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox">
+            <input type="checkbox" id="checkbox" />
+            <div class="slider round">
+                <i class="fas fa-sun icon-sun"></i>
+                <i class="fas fa-moon icon-moon"></i>
+            </div>
+        </label>
+    </div>
+
+    <!-- Hero Header -->
+    <header class="hero-header">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="hero-tag"><i class="fas fa-plane-departure"></i> 8/11 - 8/16 日本自由行</span>
+            <h1>東京親子高 CP 值旅遊指南</h1>
+            <p class="hero-subtitle">兩大兩小 ‧ 紅眼班機避暑神隊友 ‧ 秋葉原住宿首選</p>
+            
+            <div class="quick-alerts">
+                <div class="alert-badge heat-warning">
+                    <i class="fas fa-temperature-high"></i>
+                    <span><strong>8月酷暑警戒：</strong> 平均 30°C~35°C。中午時段務必安排室內冷氣行程！</span>
+                </div>
+                <div class="alert-badge redeye-info">
+                    <i class="fas fa-bed"></i>
+                    <span><strong>紅眼班機提醒：</strong> 首日上午排空、下午補眠，是帶小孩出遊的生存關鍵。</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="main-container">
+        <!-- Sidebar Quick Navigation & Stats -->
+        <section class="overview-section card">
+            <div class="card-body">
+                <h2><i class="fas fa-info-circle"></i> 旅程基本資訊</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-label">出發日期</span>
+                        <span class="stat-val">8/11 (二)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">回程日期</span>
+                        <span class="stat-val">8/16 (日)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">主住宿點</span>
+                        <span class="stat-val">秋葉原 (4晚)</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">末晚住宿</span>
+                        <span class="stat-val">機場飯店 (1晚)</span>
+                    </div>
+                </div>
+                
+                <div class="quick-tips-box">
+                    <h3><i class="fas fa-lightbulb"></i> 交通與票券說明</h3>
+                    <ul>
+                        <li><span class="badge badge-primary">地鐵 & JR 票價</span>：因兩位孩子分別升國一與升高一，在日皆須購買<strong>大人票價（成人票）</strong>。</li>
+                        <li><span class="badge badge-primary">Tokyo Subway Ticket 72小時券</span>：大人 ¥1,500，可 72 小時地鐵無限搭乘，建議人手一張。</li>
+                        <li><span class="badge badge-accent">Welcome Suica</span>：免押金，搭乘 JR（如山手線）與部分私鐵專用。</li>
+                        <li><strong>省錢提示：</strong> 全程使用地鐵券，JR 刷 Suica 做輔助，是 CP 值最高的搭配。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Itinerary Section -->
+        <section class="itinerary-section card">
+            <div class="itinerary-header">
+                <h2><i class="fas fa-calendar-alt"></i> 每日詳細行程</h2>
+                <div class="route-toggle-wrapper">
+                    <span class="toggle-label"><i class="fas fa-umbrella-beach"></i> 依天氣切換模式：</span>
+                    <button id="toggle-route-btn" class="btn btn-outline active-sunny">
+                        <i class="fas fa-sun icon-sunny"></i> 晴天防暑行程
+                    </button>
+                </div>
+            </div>
+
+            <!-- Day Tabs -->
+            <div class="tabs-container">
+                <div class="tabs-scroll">
+                    <button class="tab-btn active" data-day="1">
+                        <span class="tab-day">Day 1</span>
+                        <span class="tab-date">8/11 (二)</span>
+                    </button>
+                    <button class="tab-btn" data-day="2">
+                        <span class="tab-day">Day 2</span>
+                        <span class="tab-date">8/12 (三)</span>
+                    </button>
+                    <button class="tab-btn" data-day="3">
+                        <span class="tab-day">Day 3</span>
+                        <span class="tab-date">8/13 (四)</span>
+                    </button>
+                    <button class="tab-btn" data-day="4">
+                        <span class="tab-day">Day 4</span>
+                        <span class="tab-date">8/14 (五)</span>
+                    </button>
+                    <button class="tab-btn" data-day="5">
+                        <span class="tab-day">Day 5</span>
+                        <span class="tab-date">8/15 (六)</span>
+                    </button>
+                    <button class="tab-btn" data-day="6">
+                        <span class="tab-day">Day 6</span>
+                        <span class="tab-date">8/16 (日)</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Day Content Holder -->
+            <div id="itinerary-content" class="itinerary-content-wrapper">
+                <!-- Will be dynamically populated by JS -->
+            </div>
+        </section>
+
+        <!-- Budget Planner Section -->
+        <section class="budget-section card">
+            <h2><i class="fas fa-calculator"></i> 親子高 CP 值預算計算器</h2>
+            <p class="section-desc">已為您預填 4 人 (2大2小) 的估計花費 (單位：新台幣 NTD)。您可以隨時修改數值以符合您的預算！</p>
+            
+            <div class="budget-container">
+                <!-- Input Fields -->
+                <div class="budget-inputs">
+                    <div class="input-group">
+                        <label for="bg-flights"><i class="fas fa-plane"></i> 機票總花費 (紅眼促銷票估計)</label>
+                        <div class="input-wrapper">
+                            <span class="currency">NT$</span>
+                            <input type="number" id="bg-flights" value="38000" min="0">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="bg-hotel"><i class="fas fa-hotel"></i> 住宿總花費 (秋葉原4晚+機場1晚)</label>
+                        <div class="input-wrapper">
+                            <span class="currency">NT$</span>
+                            <input type="number" id="bg-hotel" value="16500" min="0">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="bg-food"><i class="fas fa-utensils"></i> 餐飲總預算 (估計 6 天)</label>
+                        <div class="input-wrapper">
+                            <span class="currency">NT$</span>
+                            <input type="number" id="bg-food" value="18000" min="0">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="bg-tickets"><i class="fas fa-ticket-alt"></i> 景點門票總預算 (多為低價或免費)</label>
+                        <div class="input-wrapper">
+                            <span class="currency">NT$</span>
+                            <input type="number" id="bg-tickets" value="4500" min="0">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="bg-transport"><i class="fas fa-subway"></i> 交通總花費 (Subway Ticket + Suica)</label>
+                        <div class="input-wrapper">
+                            <span class="currency">NT$</span>
+                            <input type="number" id="bg-transport" value="3500" min="0">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Budget Summary -->
+                <div class="budget-summary">
+                    <div class="summary-card">
+                        <span class="summary-title">預估總花費 (4人)</span>
+                        <span class="summary-value" id="total-budget">NT$ 80,500</span>
+                    </div>
+                    <div class="summary-card secondary">
+                        <span class="summary-title">每人平均花費</span>
+                        <span class="summary-value" id="per-person-budget">NT$ 20,125</span>
+                    </div>
+
+                    <div class="cp-analysis">
+                        <div class="cp-title"><i class="fas fa-percentage"></i> CP 值分析建議：</div>
+                        <p id="cp-advice-text">本行程大量使用地鐵券、前往免門票的東京都廳展望台，以及門票極低的葛西臨海水族館，CP值高達 95%！住宿秋葉原省去大筆換車費用。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Packing & Survival Guide Section -->
+        <section class="checklist-section card">
+            <div class="checklist-grid">
+                <!-- Packing Checklist -->
+                <div class="checklist-col">
+                    <h2><i class="fas fa-tasks"></i> 8月日本親子避暑打包清單</h2>
+                    <p class="section-desc">勾選已準備好的物品，網頁會自動記憶您的進度：</p>
+                    <ul class="todo-list" id="packing-list">
+                        <li>
+                            <input type="checkbox" id="pack-fan">
+                            <label for="pack-fan">USB手持式/掛頸式小風扇 (人手一支)</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="pack-cool">
+                            <label for="pack-cool">退熱貼、防暑涼感濕紙巾</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="pack-sun">
+                            <label for="pack-sun">兒童防曬乳 (SPF 50+) & 遮陽帽/太陽眼鏡</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="pack-bottle">
+                            <label for="pack-bottle">保溫隨身水瓶 (日本販賣機與超商隨時補給水與運動飲料)</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="pack-umbrella">
+                            <label for="pack-umbrella">晴雨兩用輕便折疊傘 (遮陽防午後雷雨)</label>
+                        </li>
+                        <li>
+                            <input type="checkbox" id="pack-towel">
+                            <label for="pack-towel">吸汗擦汗小毛巾 (多備幾條在身上替換)</label>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Redeye Survival Tips -->
+                <div class="checklist-col">
+                    <h2><i class="fas fa-shield-alt"></i> 紅眼班機親子生存指南</h2>
+                    <div class="survival-guide-container">
+                        <div class="survival-item">
+                            <div class="survival-icon"><i class="fas fa-plane"></i></div>
+                            <div class="survival-text">
+                                <h4>機上好眠裝備</h4>
+                                <p>為小孩準備充氣頸枕、降噪耳塞或耳機，並帶一件輕便薄外套防止機上空調過冷。</p>
+                            </div>
+                        </div>
+                        <div class="survival-item">
+                            <div class="survival-icon"><i class="fas fa-clock"></i></div>
+                            <div class="survival-text">
+                                <h4>清晨抵達應變</h4>
+                                <p>抵達機場後，直接在機場洗漱，搭乘最早班次前往秋葉原飯店寄存行李。找家 7-11 或連鎖早餐店（如松屋、Komeda's Coffee）安頓並歇腳。</p>
+                            </div>
+                        </div>
+                        <div class="survival-item">
+                            <div class="survival-icon"><i class="fas fa-bed"></i></div>
+                            <div class="survival-text">
+                                <h4>首日下午強制補眠</h4>
+                                <p>下午 3 點辦理 Check-in 後，建議全家睡個午覺補眠 2~3 小時，傍晚再出門。這將決定接下來 5 天全家的旅遊品質與體力！</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <p>© 2026 東京親子高 CP 值自由行指南. Designed for family of 4.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
