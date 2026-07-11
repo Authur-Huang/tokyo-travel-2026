@@ -990,45 +990,70 @@ input:checked + .slider:before {
     }
 }
 
-/* Horizontal Reminders Layout Styles */
-.reminders-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+/* Horizontal Grid Layout for Reminders */
+.reminders-list-horizontal {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
     margin-top: 1.25rem;
 }
 
-.reminder-row {
+.reminder-card-horizontal {
     background: rgba(148, 163, 184, 0.02);
     border: 1px solid var(--border-card);
     padding: 1.25rem;
     border-radius: 16px;
-    display: grid;
-    grid-template-columns: 180px 1fr;
-    gap: 1.5rem;
-    align-items: start;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
 }
 
-.reminder-header {
+.reminder-card-horizontal h3 {
+    font-size: 0.92rem;
     font-weight: 700;
     color: var(--accent);
-    font-size: 1.05rem;
+    margin: 0;
     display: flex;
     align-items: center;
+    gap: 0.4rem;
+    border-bottom: 1px dashed var(--border-card);
+    padding-bottom: 0.5rem;
+}
+
+.reminder-card-horizontal ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
     gap: 0.5rem;
 }
 
-.reminder-body {
-    font-size: 0.88rem;
+.reminder-card-horizontal li {
+    font-size: 0.8rem;
     color: var(--text-muted);
-    line-height: 1.6;
-    margin: 0;
+    line-height: 1.45;
+    position: relative;
+    padding-left: 0.85rem;
 }
 
-@media (max-width: 768px) {
-    .reminder-row {
+.reminder-card-horizontal li::before {
+    content: "•";
+    color: var(--primary);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+@media (max-width: 992px) {
+    .reminders-list-horizontal {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .reminders-list-horizontal {
         grid-template-columns: 1fr;
-        gap: 0.5rem;
     }
 }
 
