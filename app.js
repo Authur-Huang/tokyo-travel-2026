@@ -7,7 +7,7 @@ const itineraryData = {
             {
                 time: "07:00 - 08:30",
                 title: "班機抵達成田機場 T3 & 購買票券",
-                desc: "捷星日本 GK012 於 07:00 順利降落成田機場第三航廈。帶孩子辦理入境與行李提領。隨後前往第二航廈購買 Welcome Suica 卡（或綁定手機 Suica），並買好京成電鐵 Skyliner 車票直奔秋葉原。首日因清晨剛落地未入住，早餐在機場或抵達秋葉原後外食享用，其餘天數早餐皆在飯店內享用。",
+                desc: "捷星日本 GK012 於 07:00 順利降落成田機場第三航廈。帶孩子辦理入境與行李提領。隨後前往第二航廈購買 Welcome Suica 卡（或設定手機 Suica），並買好京成電鐵 Skyliner 車票直奔秋葉原。首日因清晨剛落地未入住，早餐可在機場或抵達飯店後享用，其餘天數早餐皆在飯店內享用。",
                 cp: "紅眼抵達 ─ 買好地鐵 72 小時券搭配 Suica 使用",
                 heat: "上午較涼爽",
                 heatClass: "cool",
@@ -17,16 +17,28 @@ const itineraryData = {
                 altDesc: "若不趕時間，可搭乘「京成 Access 特急」直達東日本橋（約 65 分鐘，僅約 ¥1,300），轉乘都營新宿線至岩本町（秋葉原旁），可省下近一半的車資！"
             },
             {
-                time: "09:00 - 12:30",
-                title: "秋葉原寄放行李 & 動漫聖地巡禮：Radio Kaikan 廣播會館",
-                desc: "先前往秋葉原飯店辦理行李寄放。隨後直奔秋葉原大門口的動漫神殿「Radio Kaikan（廣播會館）」，9 層樓裝滿了 K-Books、AmiAmi、Yellow Submarine 等各式模型、公仔及動漫周邊，讓兩位國高中孩子大開眼界！隨後逛隔壁的「Yodobashi-Akiba（友都八喜）」，6樓有整層的電競鍵盤滑鼠、電腦配件與最新 3C 科技設備。",
-                cp: "免門票 ─ 3C 電玩與動漫模型大本營",
+                time: "09:00 - 10:30",
+                title: "前往飯店寄存行李 & 享用精緻早茶",
+                desc: "抵達秋葉原站後，從昭和通口步行約 6~8 分鐘，抵達本次住宿的 **THE TOURIST HOTEL & Cafe AKIHABARA**。辦理大件行李寄存，隨後可直接在飯店極具口碑的 1 樓設計感咖啡廳（THE TOURIST HOTEL & Cafe）歇腳，享用精緻的手沖咖啡、三明治與飲品，給剛搭完紅眼班機的家人一個舒適的起點。",
+                cp: "飯店精品咖啡廳 ─ 環境幽雅，歇腳首選",
+                heat: "室內冷氣開放",
+                heatClass: "cool",
+                transit: "從 JR 秋葉原站昭和通口或地鐵秋葉原站 1 號出口步行約 6~8 分鐘即達飯店",
+                cost: "咖啡與輕食約 ¥600 - ¥1,000 / 人",
+                altTitle: "早餐備案：秋葉原連鎖早餐",
+                altDesc: "若飯店咖啡廳客滿，可至車站周邊的 Komeda's Coffee（點咖啡送吐司）享用經典日式朝食。"
+            },
+            {
+                time: "10:30 - 12:30",
+                title: "秋葉原動漫聖地巡禮：Radio Kaikan 廣播會館 & Yodobashi",
+                desc: "步行前往秋葉原大門口的動漫地標「Radio Kaikan（廣播會館）」，9 層樓裝滿了 K-Books、AmiAmi、Yellow Submarine 等公仔、模型與卡牌店，升國一與升高一的孩子一定會瘋狂！隨後逛隔壁的「Yodobashi-Akiba（友都八喜）」，6樓有整層的電競硬體、組裝PC配件與最新 3C 科技設備。",
+                cp: "免門票 ─ 全球 3C 與動漫模型大本營",
                 heat: "全室內冷氣開放",
                 heatClass: "cool",
-                transit: "步行",
+                transit: "從飯店步行約 8 分鐘",
                 cost: "免費參觀（購物另計）",
                 altTitle: "避暑備案：秋葉原 Gachapon 會館",
-                altDesc: "若陽光太大，可改去「秋葉原扭蛋會館」，室內數百台扭蛋機可安心避暑。"
+                altDesc: "若戶外陽光太強，可改去「秋葉原扭蛋會館」，室內數百台扭蛋機可安心避暑。"
             },
             {
                 time: "12:30 - 14:00",
@@ -43,7 +55,7 @@ const itineraryData = {
             {
                 time: "14:00 - 16:30",
                 title: "飯店辦理 Check-in & 強制補眠",
-                desc: "返回秋葉原飯店辦理入住手續、拿行李進房。由於凌晨搭乘 02:40 的紅眼班機，全家體力已透支，**務必在此時段強制睡覺補眠 2~3 小時**。這段休息時間是保證接下來 5 天旅遊品質的生存關鍵！",
+                desc: "返回 **THE TOURIST HOTEL & Cafe AKIHABARA** 辦理入住手續並拿行李進房。由於凌晨搭乘 02:40 的紅眼班機，全家體力已透支，**務必在此時段強制睡覺補眠 2~3 小時**。這段休息時間是保證接下來 5 天旅遊品質的生存關鍵！",
                 cp: "適度補眠 ─ 換取後半段行程好體力",
                 heat: "室內冷氣",
                 heatClass: "cool",
@@ -59,7 +71,7 @@ const itineraryData = {
                 cp: "免門票 ─ 體驗中古老街與大型電玩魅力",
                 heat: "傍晚稍涼/室內",
                 heatClass: "cool",
-                transit: "步行",
+                transit: "從飯店步行約 8-10 分鐘",
                 cost: "遊戲機單次約 ¥100 - ¥200",
                 altTitle: "雨天備案：Super Potato 懷舊遊戲店",
                 altDesc: "若下雨，可改逛有頂棚的電玩店，或專攻復古遊戲天堂「Super Potato」，順便品嚐日本古早味零食。"
@@ -85,8 +97,8 @@ const itineraryData = {
             {
                 time: "08:00 - 09:00",
                 title: "飯店享用早餐",
-                desc: "在飯店享用早餐，吃飽吃好，準備迎接今天澀谷與池袋兩大動漫聖地的挑戰。今天兩位孩子會非常興奮！",
-                cp: "飯店早餐 ─ 方便又省錢",
+                desc: "在 **THE TOURIST HOTEL & Cafe AKIHABARA** 享用美味精緻的早茶/早餐。該店以手沖咖啡與優質烘焙聞名，在極具質感的工業風空間內享用完早餐後，滿電出發！",
+                cp: "飯店優質早茶 ─ 質感品味首選",
                 heat: "室內冷氣",
                 heatClass: "cool",
                 transit: "無",
@@ -101,7 +113,7 @@ const itineraryData = {
                 cp: "免門票 ─ 電玩巨頭官方直營旗艦店群",
                 heat: "室內冷氣",
                 heatClass: "cool",
-                transit: "地鐵半藏門線：神保町 (秋葉原旁) → 澀谷站；或搭 JR 山手線直達",
+                transit: "從飯店步行 6 分鐘至地鐵秋葉原站 ➔ 搭乘日比谷線至神保町轉半藏門線 ➔ 澀谷站；或步行至 JR 秋葉原站搭山手線直達",
                 cost: "免費參觀（購物另計）",
                 altTitle: "避暑備案：Shibuya Sky 展望台",
                 altDesc: "如果對電玩沒興趣，可預約 Shibuya Sky 展望台（須提前預訂）觀賞涉谷十字路口，但門票較貴且戶外防曬要注意。"
@@ -151,12 +163,12 @@ const itineraryData = {
             {
                 time: "08:00 - 09:00",
                 title: "飯店享用早餐",
-                desc: "在飯店享用早餐，吃得營養飽足，為今天的行程做好準備。今日重點是臨海水族館與東京地標晴空塔。",
-                cp: "飯店早餐 ─ 節省首站交通時間",
+                desc: "在 **THE TOURIST HOTEL & Cafe AKIHABARA** 享用元氣早餐。今天將前往臨海的海藍色水族館以及東京地標晴空塔，行程多采多姿。",
+                cp: "飯店美味早餐 ─ 充電出發",
                 heat: "室內冷氣",
                 heatClass: "cool",
                 transit: "無",
-                cost: "已含在房費內",
+                cost: "已含在房費中",
                 altTitle: "無備案",
                 altDesc: "在飯店用餐。"
             },
@@ -167,10 +179,10 @@ const itineraryData = {
                 cp: "公立水族館 CP 值之王，門票僅民營的 1/3",
                 heat: "館內冷氣，摩天輪內有冷氣",
                 heatClass: "cool",
-                transit: "JR 山手線：秋葉原 → 東京站，轉 JR 京葉線 → 葛西臨海公園站（約 25 分鐘）",
+                transit: "從飯店步行 6 分鐘至地鐵秋葉原站 ➔ 搭地鐵至八丁堀站 ➔ 轉乘 JR 京葉線直達葛西臨海公園站（約 30 分鐘）",
                 cost: "水族館門票大人 ¥700，摩天輪 ¥800 / 人",
                 altTitle: "避暑備案：葛西臨海公園小火車遊園",
-                altDesc: "若公園戶外太曬，水族館出來後直接搭乘有遮陽的遊園小火車，吹著海風繞公園一圈，免去烈日曝曬。"
+                altDesc: "若公園戶外太曬，水族館出來後直接搭乘有遮陽的遊園小火車，吹著海風繞公園一圈，免去烈日鋪曬。"
             },
             {
                 time: "13:00 - 14:00",
@@ -217,8 +229,8 @@ const itineraryData = {
             {
                 time: "08:00 - 09:00",
                 title: "飯店享用早餐",
-                desc: "在飯店享用早餐後，準備好防曬與隨身水瓶。今日行程結合日本神道文化與新宿 3C 超級大本營。",
-                cp: "飯店早餐 ─ 節省早晨找餐廳時間",
+                desc: "在 **THE TOURIST HOTEL & Cafe AKIHABARA** 享用美味早餐，補充足夠的水分與能量。今天將結合神道森林與繁華的新宿 3C 超級街區。",
+                cp: "飯店早餐 ─ 節省早晨時間",
                 heat: "室內冷氣",
                 heatClass: "cool",
                 transit: "無",
@@ -233,7 +245,7 @@ const itineraryData = {
                 cp: "免門票 ─ 自然陰涼消暑",
                 heat: "高聳樹蔭，上午較清爽",
                 heatClass: "cool",
-                transit: "JR 山手線：秋葉原站 → 原宿站（直達 25 分鐘）",
+                transit: "從飯店步行 8 分鐘至 JR 秋葉原站 ➔ 搭乘中央總武線（各停）至代代木站 ➔ 步行至神宮入口",
                 cost: "免費",
                 altTitle: "下雨備案：直接前往新宿西口地下街",
                 altDesc: "若雨勢太大，取消神宮行程，直接搭電車去新宿站，逛全室內的新宿西口地下商城與 3C 連鎖店。"
@@ -295,7 +307,7 @@ const itineraryData = {
             {
                 time: "08:00 - 09:00",
                 title: "飯店早餐 & 辦理退房寄放行李",
-                desc: "在飯店享用最後一餐美味早餐。隨後辦理退房，並將所有大件行李暫時寄放在前台。今天下午要將行李取回並搭車前往機場。",
+                desc: "在 **THE TOURIST HOTEL & Cafe AKIHABARA** 享用最後一餐美味早餐，大杯手沖咖啡。隨後辦理退房，並將大件行李暫時免費寄放在前台。今天下午要將行李取回並搭車前往機場。",
                 cp: "飯店早餐 ─ 補充本日充足體力",
                 heat: "室內冷氣",
                 heatClass: "cool",
@@ -311,7 +323,7 @@ const itineraryData = {
                 cp: "免門票 ─ 二手動漫模型與懷舊科技寶庫",
                 heat: "全室內商場冷氣",
                 heatClass: "cool",
-                transit: "JR 總武線（各停）：秋葉原站 → 中野站（直達 20 分鐘）",
+                transit: "從飯店步行 8 分鐘至 JR 秋葉原站 ➔ 搭乘總武線直達中野站（約 20 分鐘）",
                 cost: "免費參觀",
                 altTitle: "防暑/雨天備案：中野 Sun Mall 商店街",
                 altDesc: "若天氣炎熱或下雨，可逛中野站出口至百老匯之間有全天候遮棚的「Sun Mall 商店街」，內有多家平價美食、鞋店與零食專賣店。"
@@ -325,37 +337,37 @@ const itineraryData = {
                 heatClass: "cool",
                 transit: "步行",
                 cost: "午餐約 ¥1,000 - ¥1,500 / 人",
-                altTitle: "午餐備案：中野百老匯地下街八層彩虹霜淇淋",
-                altDesc: "也可以在百老匯地下美食街享用平價讚岐烏龍麵，飯後帶孩子吃 Daily Chiko 知名的「八層彩虹巨無霸霜淇淋」。"
+                altTitle: "午餐備案：中野百老匯地下街平價小吃",
+                altDesc: "百老匯地下街有許多便宜的日式烏龍麵、讚岐烏龍麵與知名的八層彩虹霜淇淋 (Daily Chiko)，好玩又省錢。"
             },
             {
                 time: "14:00 - 17:30",
                 title: "返回秋葉原進行最後採購 ─ 提取行李",
-                desc: "下午搭車返回秋葉原。給孩子們最後的自由時間，前往駿河屋、Super Potato 或 Animate 進行補貨。傍晚 18:00 前返回飯店拿取寄存的行李，準備出發前往成田機場。",
+                desc: "下午搭車返回秋葉原。給孩子們最後的自由時間，前往駿河屋、Super Potato 或 Animate 進行補貨。傍晚 18:00 前返回 **THE TOURIST HOTEL & Cafe AKIHABARA** 提取寄放的行李，準備出發前往成田機場。",
                 cp: "把握最後採買時間 ─ 將行李箱裝滿",
                 heat: "戶外高溫/室內",
                 heatClass: "cool",
-                transit: "JR 總武線：中野站 → 秋葉原站",
+                transit: "JR 總武線：中野站 → 秋葉原站，步行回飯店提取行李",
                 cost: "免費",
                 altTitle: "無備案",
                 altDesc: "下午需完成取行李，時間較固定。"
             },
             {
                 time: "18:00 - 19:30",
-                title: "搭乘 Skyliner 直奔成田機場 T3",
-                desc: "從飯店提領行李後，前往日暮里站搭乘舒適快速的「京成電鐵 Skyliner」前往成田機場第二航廈，再步行至第三航廈。Skyliner 全車對號且有冷氣，適合玩了一整天、拖著戰利品的疲憊家人休息。",
-                cp: "安全準時 ─ 輕鬆避開通勤人潮",
+                title: "利用地鐵優勢 ─ 搭乘 Skyliner 直奔成田機場 T3",
+                desc: "從飯店提領行李後，利用飯店的地理優勢，步行至地鐵秋葉原站搭乘日比谷線直達上野，並轉乘京成電鐵 Skyliner 直達成田機場。Skyliner 全車對號且有冷氣，適合玩了一整天、拖著戰利品的疲憊家人休息。",
+                cp: "極速交通 ─ 利用日比谷線 3 分鐘轉乘 Skyliner，省時省力",
                 heat: "車廂內冷氣",
                 heatClass: "cool",
-                transit: "JR 山手線：秋葉原站 → 日暮里站 → 轉乘京成 Skyliner 直達成田機場 T2，步行 5-8 分鐘至第三航廈",
-                cost: "車資約 ¥2,300 / 大人，兒童半價",
-                altTitle: "省錢備案：Access 特急",
-                altDesc: "若預算考量，可從秋葉原搭地鐵到東日本橋站轉搭「京成 Access 特急」前往成田機場（約 ¥1,350/人），但沒有對號座位。"
+                transit: "從飯店步行 6 分鐘 ➔ 地鐵秋葉原站搭乘日比谷線（2站，3分鐘）➔ 上野站 ➔ 轉乘京成 Skyliner 直達成田機場 T2，步行至第三航廈",
+                cost: "車資約 ¥2,500 / 大人，兒童半價",
+                altTitle: "省錢備案：都營地下鐵轉 Access 特急",
+                altDesc: "可步行 5 分鐘至岩本町站搭都營新宿線 ➔ 東日本橋站轉京成 Access 特急直達成田機場（約 ¥1,450 / 人）。"
             },
             {
                 time: "19:30 - 22:40",
                 title: "成田 T3 辦理登機 & 免稅店最後採購",
-                desc: "晚上 19:30 抵達捷星櫃檯辦理登機手續並託運行李。隨後在三航廈美食街外用餐點吃晚餐（如宮武讚岐烏龍麵或長崎強棒麵），並在過關後的免稅店做伴手禮最後掃貨（東京 Banana、白色戀人、Royce生巧克力）。搭乘 22:40 的 GK011 返台，結束這趟精彩好玩又省錢的 3C 動漫親子自由行！",
+                desc: "晚上 19:30 抵達捷星櫃檯辦理登機手續並託運行李。隨後在三航廈美食街外用餐點吃晚餐（如宮武讚岐烏龍麵或長崎強棒麵），並在過關後的免稅店做伴手禮最後大掃貨（東京 Banana、白色戀人、Royce生巧克力）。搭乘 22:40 的 GK011 返台，結束這趟精彩好玩又省錢的 3C 動漫親子自由行！",
                 cp: "回程航班時間極佳 ─ 玩滿整整五天！",
                 heat: "室內冷氣",
                 heatClass: "cool",
@@ -418,7 +430,7 @@ function renderItinerary(dayNum) {
         const heatTextClass = act.heatClass === 'danger' ? 'danger' : 'cool';
         
         html += `
-            <div class="timeline-item ${act.title.includes('退房') || act.title.includes('機場') || act.title.includes('Skyliner') ? 'lodging-move' : ''}">
+            <div class="timeline-item ${act.title.includes('退房') || act.title.includes('機場') || act.title.includes('Skyliner') || act.title.includes('寄存行李') ? 'lodging-move' : ''}">
                 <div class="timeline-dot"></div>
                 <span class="item-time"><i class="far fa-clock"></i> ${act.time}</span>
                 <div class="item-card ${showAlternative ? 'alternative-active' : ''}">
@@ -495,7 +507,7 @@ function calculateBudget() {
     // Dynamic Optimization Advice
     let advice = "";
     if (transport > 4500) {
-        advice += "💡 您的交通預算偏高，建議善用東京地鐵 72 小時券 (大人只需 ¥1,500/約 NT$320)，因為兩位孩子皆為國高中生，皆適用成人票價，因此使用 72 小時地鐵券更是活算！";
+        advice += "💡 您的交通預算偏高，建議善用東京地鐵 72 小時券 (大人只需 ¥1,500/約 NT$320)，因為兩位孩子皆為國高中生，皆適用成人票價，因此使用 72 小時地鐵券更是划算！";
     } else if (tickets > 8000) {
         advice += "💡 門票預算稍高。本行程精選了免費的東京都廳展望台（省下晴空塔昂貴門票）以及極便宜的葛西臨海水族館（門票僅 ¥700）。建議多利用這些公立或免費景點來維持高 CP 值。";
     } else if (hotel < 10000) {
