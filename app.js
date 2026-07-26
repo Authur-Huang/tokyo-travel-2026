@@ -65,14 +65,14 @@ const itineraryData = {
                 altDesc: "若孩子儲備體力佳不想睡，可先去逛「壽屋 Kotobukiya Store」，採購寶可夢與各大遊戲官方周邊。"
             },
             {
-                time: "17:00 - 21:00",
-                title: "秋葉原動漫商圈挖寶：Mandarake Complex & GiGO 遊戲中心",
-                desc: "傍晚氣溫轉涼，出門逛黑色的「Mandarake Complex」大樓，8 層樓擺滿了二手珍稀公仔、絕版懷舊遊戲與古老電子設備。隨後前往「GiGO 秋葉原」大玩夾娃娃機、音樂節奏遊戲或賽車，感受道地的日式遊樂場氛圍！",
-                cp: "免門票 ─ 體驗中古老街與大型電玩魅力",
+                time: "17:00 - 18:45",
+                title: "秋葉原動漫商圈挖寶：Mandarake Complex 中古大樓",
+                desc: "傍晚氣溫轉涼，出門逛黑色的「Mandarake Complex」大樓，8 層樓擺滿了二手珍稀公仔、絕版懷舊遊戲與古老電子設備。逛到 18:45 左右收手，準時去吃晚餐，避免小孩餓過頭情緒崩潰。",
+                cp: "免門票 ─ 體驗中古老街挖寶魅力",
                 heat: "傍晚稍涼/室內",
                 heatClass: "cool",
                 transit: "從飯店步行約 8-10 分鐘",
-                cost: "遊戲機單次約 ¥100 - ¥200",
+                cost: "免費參觀（購物另計）",
                 altTitle: "雨天備案：Super Potato 懷舊遊戲店",
                 altDesc: "若下雨，可改逛有頂棚的電玩店，或專攻復古遊戲天堂「Super Potato」，順便品嚐日本童年古早味零食。"
             },
@@ -87,6 +87,18 @@ const itineraryData = {
                 cost: "晚餐約 ¥1,200 - ¥2,200 / 人",
                 altTitle: "晚餐備案：秋葉原 九州じゃんがら拉麵",
                 altDesc: "若想吃湯麵，可去吃經典的九州豚骨拉麵，提供溫暖又濃郁的道地湯頭。"
+            },
+            {
+                time: "20:30 - 21:30",
+                title: "餐後放電：GiGO 秋葉原遊戲中心",
+                desc: "吃飽後散步到「GiGO 秋葉原」大玩夾娃娃機、音樂節奏遊戲或賽車，感受道地的日式遊樂場氛圍。**首日已搭紅眼班機，21:30 務必收工回飯店**，把體力留給接下來四天。",
+                cp: "免門票 ─ 日式大型電玩體驗，收尾剛剛好",
+                heat: "室內冷氣",
+                heatClass: "cool",
+                transit: "步行 5 分鐘，回飯店約 8 分鐘",
+                cost: "遊戲機單次約 ¥100 - ¥200",
+                altTitle: "體力不支備案：直接回飯店睡覺",
+                altDesc: "若孩子已經累爆，這一段可以整段砍掉直接回飯店。Day 5 上午在秋葉原還有一次補逛機會，不必勉強。"
             }
         ]
     },
@@ -400,9 +412,360 @@ const itineraryData = {
     }
 };
 
+// ============================================================
+// Pre-trip Preparation Data (行前準備駕駛艙)
+// 以「桃園機場 T1 集合時間」8/11 00:40 為基準往前推算階段
+// ============================================================
+const TRIP_DEPART = new Date('2026-08-11T00:40:00+08:00');
+
+const prepData = [
+    {
+        phase: "階段一：現在就要辦（越早越好）",
+        deadline: "7/28 前",
+        icon: "fa-triangle-exclamation",
+        tone: "urgent",
+        items: [
+            { id: "prep-passport", title: "四本護照效期確認", desc: "需有效期 6 個月以上（至少到 **2027/2/11**）。孩子的護照最容易過期，今天就翻出來看，過期補辦要 4 個工作天。" },
+            { id: "prep-baggage", title: "捷星託運行李加購", desc: "**GK012/GK011 是廉航，票價不含託運行李**。回程扛戰利品最容易超重，建議去程買 20kg、回程買到 30kg，臨櫃補買貴 2-3 倍。" },
+            { id: "prep-insurance", title: "旅平險 + 不便險", desc: "8 月是颱風季又是紅眼班機，**班機延誤/取消的機率明顯偏高**，不便險比旅平險更用得到。刷卡附贈的通常保障不足，建議另外投保。" },
+            { id: "prep-taxi", title: "桃機凌晨接送預約（指定 7 人座）", desc: "8/11 00:40 前要到 T1。2 大 2 小 + 3~4 個大箱，**一般轎車塞不下，務必指定 7 人座/9 人座或 SUV**。凌晨時段車少，越晚訂越難叫。" },
+            { id: "prep-hotel", title: "飯店訂房再確認", desc: "確認 8/11~8/15 共 4 晚、**入住前可否早上寄放行李、退房後可否寄放到傍晚**（Day 1 和 Day 5 的行程都靠這個）。" },
+            { id: "prep-obon", title: "Obon 期間營業日逐家確認", desc: "8/13~8/16 是盂蘭盆節。**淺草釜飯むつみ、Roast Beef Ono、AFURI、Sakura Tei、DULTON 自由が丘、RED° TOKYO TOWER** 都要上官網或打電話確認當天有開，並先想好備案。" }
+        ]
+    },
+    {
+        phase: "階段二：出發前 7 天",
+        deadline: "8/4 前",
+        icon: "fa-file-circle-check",
+        tone: "normal",
+        items: [
+            { id: "prep-vjw", title: "Visit Japan Web 全家註冊", desc: "**4 人各自建立帳號**，填好入境審查與海關申報，把兩組 QR Code 截圖存在手機相簿。孩子的帳號可掛在家長下同行者。落地當場才辦會塞爆。" },
+            { id: "prep-sim", title: "eSIM ×2 + 實體上網卡 ×2 下單", desc: "**絕對不要合租一台分享器** —— 本行程 Day 2/3/4 有媽媽與孩子分流路線，分開就失聯。爸媽用 eSIM、孩子用實體卡，每人獨立上網。" },
+            { id: "prep-card", title: "信用卡開通海外交易 + 通知銀行", desc: "確認已開通國外消費、記下海外回饋 3% 以上的那張帶著。**先向銀行報備出國，避免在唐吉訶德刷大額時被防盜刷鎖卡。**" },
+            { id: "prep-cash", title: "換日幣 ¥80,000 ~ ¥100,000", desc: "銀行換匯比機場划算。**分兩批換、分兩個包放**，爸媽各帶一半。" },
+            { id: "prep-tickets", title: "線上預訂票券", desc: "Tokyo Subway Ticket 72 小時券 ×4、RED° TOKYO TOWER 門票、Skyliner 車票。**注意：地鐵券請忍到 8/12 早上第一次搭地鐵時才啟用。**" },
+            { id: "prep-reserve", title: "熱門餐廳線上訂位", desc: "Obon 連假期間人潮爆量。**銀座鍋爸（Nabezo）、澀谷藏壽司全球旗艦店**建議先線上取號或訂位，否則現場等 60~90 分鐘是常態。" }
+        ]
+    },
+    {
+        phase: "階段三：出發前 3 天",
+        deadline: "8/8",
+        icon: "fa-box-open",
+        tone: "normal",
+        items: [
+            { id: "prep-line", title: "建立「東京 LINE 家庭群組」", desc: "全員加入，**並實際測試一次「即時位置分享」功能**，確認每個人都會開。分流日這是唯一的保命繩。" },
+            { id: "prep-map", title: "Google Maps 下載東京離線地圖", desc: "地鐵地下層常收不到訊號，離線地圖能救命。順便把飯店、每天的集合地點先加到「已儲存」清單。" },
+            { id: "prep-copy", title: "護照影本 + 大頭照 2 張", desc: "**與護照正本分開放**（例如正本在爸爸身上、影本在媽媽行李）。護照遺失時補辦入國證明書一定要用到。" },
+            { id: "prep-medicine", title: "常備藥品打包", desc: "暈車藥、腸胃藥、退燒藥、防蚊液、OK 繃、涼感貼。**慣性用藥請附英文藥單**，日本海關對藥品數量有規定。" },
+            { id: "prep-scale", title: "行李秤先秤一次空箱", desc: "先知道空箱幾公斤，回程才抓得準還能塞多少。行李秤本身很輕，帶去日本回程再秤一次最保險。" }
+        ]
+    },
+    {
+        phase: "階段四：出發前一晚",
+        deadline: "8/10 晚上",
+        icon: "fa-moon",
+        tone: "normal",
+        items: [
+            { id: "prep-powerbank", title: "行動電源與充電線（限手提）", desc: "**行動電源、鋰電池一律不可託運**，必須隨身手提。四支手機一整天拍照導航，建議至少兩顆行動電源。" },
+            { id: "prep-charge", title: "所有裝置充飽 + Suica 先加值", desc: "手機、行動電源、相機全部充滿。**先在 Apple Pay 把 Welcome Suica 加值 ¥3,000**，落地就能直接感應搭車。" },
+            { id: "prep-screenshot", title: "重要文件截圖存相簿", desc: "電子機票、訂房確認信、Visit Japan Web QR、保單號碼、接送車訂單。**存成截圖而非只存在信箱**，沒網路時照樣看得到。" },
+            { id: "prep-carryon", title: "隨身包最終確認", desc: "護照、現金、手機、行動電源、**薄外套（機上冷氣很冷）**、頸枕、耳塞。液體一律 100ml 以下裝夾鏈袋。" },
+            { id: "prep-nap", title: "22:00 前全家小睡 1~2 小時", desc: "**這是整趟旅程最被低估的一件事。** 凌晨 02:40 的班機，沒先睡過的話 Day 1 全家會像行屍走肉，直接毀掉第一天。" }
+        ]
+    },
+    {
+        phase: "階段五：出發當天凌晨",
+        deadline: "8/11 00:40 前",
+        icon: "fa-plane-departure",
+        tone: "final",
+        items: [
+            { id: "prep-arrive", title: "00:40 前抵達桃園機場 T1", desc: "捷星櫃檯通常起飛前 2 小時開櫃、**起飛前 45~60 分鐘關櫃**。凌晨櫃檯人力少，早到絕不吃虧。" },
+            { id: "prep-final", title: "出門前最後三樣：護照、錢包、手機", desc: "站在玄關唸一次「護、錢、機」。其他東西忘了都能在日本買，這三樣不行。" },
+            { id: "prep-house", title: "家裡：瓦斯、電源、門窗、垃圾", desc: "關瓦斯總開關、拔掉不必要插頭、鎖好門窗、丟垃圾（8 月放 5 天會出事）。" }
+        ]
+    }
+];
+
+// ============================================================
+// Plan B 備案作戰室 (Contingency War Room)
+// 對應「行前準備駕駛艙」點出的風險，逐項給出可執行的替代方案
+// ============================================================
+const contingencyData = [
+    {
+        id: "shop",
+        label: "店家撲空",
+        icon: "fa-store-slash",
+        note: "**Obon 期間鐵律：百貨公司、大型商場與連鎖店照常營業；個人經營的老店、名店最容易在 8/13~8/16 公休。** 所以備案一律往「百貨美食街」或「連鎖店」靠，成功率最高，也不用臨時查資料。",
+        items: [
+            {
+                title: "Day 1 午餐｜Roast Beef Ono 沒開或排太長",
+                trigger: "8/11 是「山之日」國定假日，排隊人潮比平日更誇張，而且剛下紅眼班機全家沒體力站著等。",
+                action: "設一個 20 分鐘上限，隊伍看起來超過就直接轉場，不要因為「都排了」而硬等。",
+                alts: [
+                    "友都八喜 8 樓餐廳樓層 ─ 多家可選、全程冷氣，且就在旁邊",
+                    "秋葉原 UDX 餐廳街 ─ 選擇多，晚上還會再來一次，先探路也好",
+                    "保底方案：松屋、吉野家、CoCo壱番屋等連鎖 ─ 快、便宜、孩子接受度高，第一天先求填飽不求驚豔"
+                ]
+            },
+            {
+                title: "Day 2 午餐｜淺草釜飯 むつみ 公休（Obon 最高風險）",
+                trigger: "傳統個人老店，正好落在盂蘭盆節第一天前後，公休機率是全行程最高的一家。",
+                action: "8/11 晚上就先查一次官方社群或打電話確認，不要 8/12 中午走到門口才發現。",
+                alts: [
+                    "東武淺草站 EKIMISE 百貨的餐廳樓層 ─ 百貨在 Obon 照常營業，最穩",
+                    "淺草 ROX 商場美食樓層 ─ 同樣有冷氣，離仲見世通很近",
+                    "直接搭銀座線提前到銀座吃 ─ 反正下午本來就要去銀座，把午餐併進去，還省了一趟折返"
+                ]
+            },
+            {
+                title: "Day 2 晚餐｜銀座鍋爸客滿或吃不下這個預算",
+                trigger: "吃到飽 ¥3,500~5,000/人，4 人一餐就吃掉整趟餐飲預算的四分之一；連假晚餐時段也最容易客滿。",
+                action: "若只是客滿，先線上取號或現場拿號碼牌，然後去逛銀座 Loft，等叫號再回來，時間完全不浪費。",
+                alts: [
+                    "銀座三越／松屋百貨高樓層美食街 ─ 壽司、釜飯、烏龍麵都有，不必在戶外排隊",
+                    "改吃大戶屋、やよい軒等定食連鎖 ─ 一餐可省一半以上，營養一樣夠",
+                    "把預算留給 Day 4 藏壽司 ─ 孩子對迴轉壽司抽獎的期待值通常高於壽喜燒"
+                ]
+            },
+            {
+                title: "Day 3 午餐｜AFURI 六本木排隊過長",
+                trigger: "AFURI 是人氣店，連假中午等 30~40 分鐘是常態。",
+                action: "先派一個人去看隊伍，其他人在 Midtown 冷氣區等消息，不要全家站在門口曬。",
+                alts: [
+                    "東京中城 B1 美食街 ─ 烏龍麵、壽司餐盒、熟食便當選擇極多",
+                    "六本木之丘的餐廳樓層 ─ 步行可達，冷氣充足",
+                    "AFURI 在東京有多家分店 ─ 用 Google Maps 查最近一家，有時走幾分鐘就不用排"
+                ]
+            },
+            {
+                title: "Day 3 下午｜RED° TOKYO TOWER 沒開或玩不過癮",
+                trigger: "體驗型設施的營運狀態變動較大，且門票是本行程單筆最大的可控支出。",
+                action: "**8/4 前務必上官網確認 8/13 有營業，並確認 Klook 能不能訂到票。** 這是階段二清單裡的一項，別跳過。",
+                alts: [
+                    "改上東京鐵塔展望台（Main Deck）純看景 ─ 時間短、花費低，地標還是拍到了",
+                    "把放電需求丟給遊戲中心 ─ GiGO／SEGA 系遊戲中心，或 Round1 這類室內綜合遊樂場，對國高中生吸引力不輸體感樂園",
+                    "時間還給秋葉原 ─ Day 1 沒逛完的駿河屋、Super Potato、Animate 一次補齊，交通還省了"
+                ]
+            },
+            {
+                title: "Day 4 午餐｜原宿 Sakura Tei 沒開",
+                trigger: "原宿的個人特色餐館，連假期間公休或大排長龍都有可能。",
+                action: "分流時段結束前先讓一個人去看狀況，順便決定要不要換地方。",
+                alts: [
+                    "東急 PLAZA 表參道原宿等商場的餐廳樓層 ─ 冷氣＋多選擇",
+                    "一風堂等拉麵連鎖 ─ 原宿、表參道一帶密度高，翻桌快",
+                    "如果孩子只想吃 DIY 鐵板，Day 1 晚餐已經在秋葉原 UDX 體驗過了，這裡可以放心換菜色"
+                ]
+            },
+            {
+                title: "Day 4 下午｜DULTON 自由が丘 撲空（最不能賭的一項）",
+                trigger: "這是媽媽從 IG 存下來、整趟最期待的行程之一，而且要專程搭一趟電車過去。撲空的心情成本遠高於其他項目。",
+                action: "**8/4 前先用官網或 Google Maps 確認 8/14 當天營業時間**，並記下電話。當天出發前再確認一次營業中再上車。",
+                alts: [
+                    "改在中目黑下車 ─ 同樣是東急東橫線，離澀谷更近（約 5 分鐘），逛完回澀谷會合時間更寬鬆",
+                    "完全不搭電車 ─ 澀谷 Loft、Standard Products、澀谷 PARCO、Hikarie 全部在冷氣大樓內，走路就到，媽媽照樣逛得到日系雜貨",
+                    "提前會合 ─ 若媽媽提早收工，可提前到 MEGA 唐吉訶德跟孩子會合，全家多逛半小時，晚餐也不會趕"
+                ]
+            }
+        ]
+    },
+    {
+        id: "weather",
+        label: "颱風・暴雨・酷暑",
+        icon: "fa-cloud-bolt",
+        note: "8 月是日本颱風季。颱風通常提前 1~2 天就看得出動向，**請每天早餐時花一分鐘看一次日本氣象廳或 Yahoo 天氣**，早一天知道就多一天調整空間。",
+        items: [
+            {
+                title: "颱風來襲，整天不宜外出 ─ A 計畫：不離開秋葉原",
+                trigger: "發布暴風警報、電車大範圍停駛，或雨勢大到帶小孩移動不安全。",
+                action: "當天直接放棄跨區行程，不要為了「排好了」硬跑。省下的門票與車資，拿去買伴手禮更划算。",
+                alts: [
+                    "飯店步行 10 分鐘內就能耗掉一整天：友都八喜（多樓層＋8F 餐廳）、唐吉訶德秋葉原店、UDX、Mandarake、GiGO、扭蛋會館",
+                    "最大好處：不搭車、不淋雨、隨時能回飯店休息換衣服，帶小孩時這點價值極高",
+                    "餐食全部就近解決，晚上早點回房整理行李，把體力存到隔天"
+                ]
+            },
+            {
+                title: "颱風日 ─ B 計畫：全程不出地面",
+                trigger: "雨勢很大但電車仍正常，還是想「有出去玩的感覺」。",
+                action: "從秋葉原搭一站到東京車站，全程走地下連通道，幾乎不會淋到雨。",
+                alts: [
+                    "東京車站一番街（拉麵街、角色商品街）─ 對動漫控的孩子吸引力十足",
+                    "八重洲地下街 ─ 商店與餐廳密集，逛半天沒問題",
+                    "這個方案的關鍵是「不出地面」，行李和衣服都不會濕"
+                ]
+            },
+            {
+                title: "午後雷陣雨（8 月最常發生）",
+                trigger: "東京夏天午後常見，通常下 1~2 小時就停。",
+                action: "就近躲進百貨或車站，喝杯飲料等它停，**不要撐傘硬走**，帶小孩淋濕很容易感冒。",
+                alts: [
+                    "按下網頁行程區右上角的「雨天/大熱冷氣行程」切換鈕 ─ 每個時段都會顯示對應的室內備案",
+                    "把當天原本排在後面的室內行程提前，戶外行程往後挪，順序對調就好",
+                    "全家人手一支輕便折疊傘（打包清單已列），比共用一支實際"
+                ]
+            },
+            {
+                title: "氣溫飆到 35°C 以上",
+                trigger: "體感溫度過高，戶外連走 30 分鐘就會有人受不了。",
+                action: "**每 90 分鐘強制進冷氣空間休息 15 分鐘**，並補充含鹽分的飲料，不要只灌白開水。",
+                alts: [
+                    "Day 4 明治神宮縮短為 40 分鐘 ─ 只走到大鳥居與正殿，不繞完整條參道",
+                    "Day 3 東京鐵塔外拍改為「快拍 10 分鐘就進室內」，芝公園草地拍照挪到傍晚",
+                    "戶外時段全部往上午 9~11 點與傍晚 5 點後集中，中午 12~3 點一律待在室內"
+                ]
+            },
+            {
+                title: "回程當天（8/15）遇到颱風",
+                trigger: "最壞的情況：班機停飛，而飯店已經退房。",
+                action: "**先查捷星官網/APP 的異動公告再決定要不要去機場**，停飛時衝到機場只會在人潮裡耗掉體力。同時立刻打電話問飯店能不能延住一晚。",
+                alts: [
+                    "飯店客滿的話，優先找成田機場周邊或上野、日暮里一帶的住宿（往機場方向，隔天好走）",
+                    "保留所有單據：住宿、餐費、交通收據，全部是不便險理賠的憑證",
+                    "詳細處理步驟見下一個分頁「班機延誤」"
+                ]
+            }
+        ]
+    },
+    {
+        id: "flight",
+        label: "班機延誤・行李",
+        icon: "fa-plane-slash",
+        note: "紅眼班機 + 廉航 + 颱風季，這是本行程機率最被低估的風險。**最關鍵的一句話：任何延誤都要跟航空公司櫃檯要「遲延証明書」**，沒有這張紙，不便險幾乎請不了款。",
+        items: [
+            {
+                title: "去程 GK012 延誤（8/11 凌晨）",
+                trigger: "起飛延後，抵達成田的時間往後推。",
+                action: "在機場就先用 LINE 通知飯店會晚到，並確認行李寄放服務的時間。Skyliner 若已購票，多數情況可改搭後面班次。",
+                alts: [
+                    "Day 1 上午整段直接砍掉 ─ 落地後改為：飯店寄行李 → 午餐 → 補眠，晚上行程照常",
+                    "Day 1 本來就是全程彈性最大的一天，秋葉原的店 Day 5 上午還能再補逛一次，不必焦慮",
+                    "反而要守住的是「下午補眠」那段 ─ 延誤代表更累，這段更不能省"
+                ]
+            },
+            {
+                title: "回程 GK011 延誤或取消（8/15 深夜）",
+                trigger: "最麻煩的情境：深夜、已退房、四個人加一堆行李。",
+                action: "**第一件事：向櫃檯索取「遲延証明書（遅延証明書）」。第二件事：一邊排隊改班機，一邊用手機訂成田周邊住宿** ─ 深夜房間會被同班旅客秒殺，動作要快。",
+                alts: [
+                    "住宿找不到時，成田機場有 24 小時可停留的區域，但帶小孩過夜是最後手段，能訂到房就訂",
+                    "全程保留：登機證、遲延証明書、住宿收據、餐費收據、計程車收據 ─ 這些就是理賠金",
+                    "回台後的接送車記得改時間，避免司機空等還照收費用"
+                ]
+            },
+            {
+                title: "回程行李超重（發生機率最高的一項）",
+                trigger: "唐吉訶德、DULTON、任天堂旗艦店買完後，行李幾乎一定會膨脹。",
+                action: "**行李箱裡先放一個可折疊旅行袋**，超重時當場把衣物移出來變成手提，這招最省錢也最快。",
+                alts: [
+                    "重的東西（零食、罐裝藥妝、模型盒）優先放手提，四個人各分擔一件",
+                    "出發前就把去程買到 20kg、回程買到 30kg ─ 事前加購比臨櫃補買便宜 2~3 倍",
+                    "**行動電源與鋰電池一律不能託運**，打包時先挑出來放隨身包"
+                ]
+            }
+        ]
+    },
+    {
+        id: "budget",
+        label: "預算超支",
+        icon: "fa-piggy-bank",
+        note: "如果玩到一半發現快超支，**請照下面的順序砍**。這個順序是依「對旅遊體驗的傷害由小到大」排的 ─ 先砍感受不到的，最後才動到會留下遺憾的。",
+        items: [
+            {
+                title: "第一刀｜銀座鍋爸吃到飽 → 百貨美食街定食",
+                trigger: "餐飲預算 NT$18,000 換算後是每人每天約 NT$900，而鍋爸單餐就要 ¥3,500~5,000/人。",
+                action: "把 Day 2 晚餐從吃到飽改成定食，一餐 4 人可省 NT$2,000 以上。",
+                alts: [
+                    "老實說：多數國高中生對「拉麵定食」的滿意度不會低於壽喜燒吃到飽，這一刀砍下去幾乎無痛",
+                    "省下的錢挪到 Day 4 藏壽司，孩子的興奮度反而更高"
+                ]
+            },
+            {
+                title: "第二刀｜RED° 門票 → 東京鐵塔展望台或免費地標",
+                trigger: "4 人門票是全程單筆最大的可控支出。",
+                action: "改成純上展望台看景，或乾脆只在芝公園拍照，把玩樂需求丟給遊戲中心。",
+                alts: [
+                    "遊戲中心單次 ¥100~200，玩一小時的花費遠低於一張體感樂園門票",
+                    "但要提醒：這一刀對孩子的期待值有影響，建議先問過他們再砍"
+                ]
+            },
+            {
+                title: "第三刀｜伴手禮集中在 MEGA 唐吉訶德一次買齊",
+                trigger: "分散在多家店零買，容易重複買、湊不到免稅門檻、也很難控制總額。",
+                action: "行程本來就把 Day 4 傍晚整段留給唐吉訶德，**先在手機上列好清單再進場**，照單採購。",
+                alts: [
+                    "一次結帳才湊得滿免稅門檻，還能用折扣券",
+                    "如果 Day 4 沒買完，飯店附近還有唐吉訶德秋葉原店，Day 5 可以補",
+                    "免稅規定與門檻近年常有調整，結帳前先問店員當日規則"
+                ]
+            },
+            {
+                title: "第四刀｜午餐改百貨地下超市便當",
+                trigger: "早餐已含在房費裡，午餐是最有壓縮空間的一餐。",
+                action: "百貨地下超市（デパ地下）的熟食便當品質好、份量足，**下午 5 點後常有半價**，晚餐也適用。",
+                alts: [
+                    "找有座位的公共休息區或公園樹蔭吃，順便休息避暑",
+                    "四人份便當常比餐廳省一半以上"
+                ]
+            },
+            {
+                title: "⛔ 不建議砍的兩項",
+                trigger: "有些省法看起來聰明，實際上會出事。",
+                action: "**交通券與水/冷飲，請不要省。**",
+                alts: [
+                    "地鐵券：省不了多少錢，卻要每次算票價、買單程票，帶小孩時的時間成本很高",
+                    "水與冷飲：8 月的東京，這是安全支出不是娛樂支出，中暑一次整趟就毀了"
+                ]
+            }
+        ]
+    },
+    {
+        id: "body",
+        label: "中暑・體力",
+        icon: "fa-notes-medical",
+        note: "**這一頁請爸媽兩人都先看過一次。** 8 月帶孩子在東京，中暑與體力崩盤的機率遠高於遺失護照或被偷東西。",
+        items: [
+            {
+                title: "中暑徵兆與現場處置",
+                trigger: "頭暈、想吐、臉脹紅、皮膚發燙卻不太出汗、走路不穩、講話反應變慢。",
+                action: "**立刻進最近的便利商店或百貨吹冷氣坐下**，不要說「再撐一下就到了」。",
+                alts: [
+                    "補充經口補水液（OS-1）或運動飲料 ─ 要含鹽分與電解質，只灌白開水反而更危險",
+                    "用冰飲或冰袋冰敷頸部兩側與腋下，這兩處降溫最快",
+                    "**若休息後沒改善、意識不清或嘔吐，直接打 119**，日本救護車免費，不要猶豫"
+                ]
+            },
+            {
+                title: "孩子體力崩盤、鬧脾氣",
+                trigger: "通常不是「不聽話」，而是「熱 + 餓 + 睡不夠」三件事同時發生。",
+                action: "先解決生理問題：找冷氣、給食物、讓他坐下 20 分鐘。生理沒解決前，講道理沒有用。",
+                alts: [
+                    "**授權砍行程**：任何一天砍掉一個景點都不會毀掉旅程，硬撐才會 ─ 這句話請爸媽先講好，現場才砍得下手",
+                    "Day 1 下午的強制補眠是全程最重要的一段，不要為了多逛一家店而跳過",
+                    "分流路線本身就是體力管理工具 ─ 走不動的人可以先回集合點吹冷氣等，不必勉強跟"
+                ]
+            },
+            {
+                title: "身體不適需要買藥或就醫",
+                trigger: "腸胃不適、感冒、過敏、輕微外傷。",
+                action: "先到藥妝店（松本清等連鎖）買成藥，店內多半有中文標示或會中文的店員。",
+                alts: [
+                    "需要就醫時，請飯店櫃檯協助聯繫附近醫療院所，這是飯店的常規服務",
+                    "**保留所有收據與診斷書** ─ 旅平險的海外醫療理賠一定要正本",
+                    "慣性用藥請隨身帶英文藥單，過海關與就醫時都用得到"
+                ]
+            }
+        ]
+    }
+];
+
 // Global State
 let currentDay = 1;
 let showAlternative = false;
+let currentPlanB = "shop";
+
+// 將 **粗體** 語法轉為 <strong>，讓行程文字裡的重點真的粗體顯示
+const md = (s = '') => String(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
 
 // DOM Elements
 const themeToggle = document.getElementById('checkbox');
@@ -416,6 +779,7 @@ const bgHotel = document.getElementById('bg-hotel');
 const bgFood = document.getElementById('bg-food');
 const bgTickets = document.getElementById('bg-tickets');
 const bgTransport = document.getElementById('bg-transport');
+const bgShopping = document.getElementById('bg-shopping');
 
 const totalBudgetEl = document.getElementById('total-budget');
 const perPersonBudgetEl = document.getElementById('per-person-budget');
@@ -455,19 +819,19 @@ function renderItinerary(dayNum) {
                 <div class="split-route-container">
                     <div class="route-col mom">
                         <h5><i class="fas fa-venus"></i> 👩 媽媽逛街路線</h5>
-                        <p>${act.momDesc}</p>
+                        <p>${md(act.momDesc)}</p>
                     </div>
                     <div class="route-col kids">
                         <h5><i class="fas fa-gamepad"></i> 👦 孩子探索路線</h5>
-                        <p>${act.kidsDesc}</p>
+                        <p>${md(act.kidsDesc)}</p>
                     </div>
                 </div>
                 <div class="meeting-point">
-                    <i class="fas fa-map-marker-alt"></i> <strong>📍 集合地點與建議：</strong> ${act.meeting}
+                    <i class="fas fa-map-marker-alt"></i> <strong>📍 集合地點與建議：</strong> ${md(act.meeting)}
                 </div>
             `;
         } else {
-            bodyHtml = `<p class="item-desc">${act.desc}</p>`;
+            bodyHtml = `<p class="item-desc">${md(act.desc)}</p>`;
         }
         
         html += `
@@ -489,7 +853,7 @@ function renderItinerary(dayNum) {
                         <div class="alternative-title">
                             <i class="fas fa-cloud-sun-rain"></i> ${act.altTitle}
                         </div>
-                        <p class="alternative-desc">${act.altDesc}</p>
+                        <p class="alternative-desc">${md(act.altDesc)}</p>
                     </div>
 
                     <div class="item-details">
@@ -538,8 +902,9 @@ function calculateBudget() {
     const food = parseFloat(bgFood.value) || 0;
     const tickets = parseFloat(bgTickets.value) || 0;
     const transport = parseFloat(bgTransport.value) || 0;
+    const shopping = parseFloat(bgShopping.value) || 0;
 
-    const total = flights + hotel + food + tickets + transport;
+    const total = flights + hotel + food + tickets + transport + shopping;
     const perPerson = total / 4; // 2 adults + 2 kids
 
     totalBudgetEl.textContent = `NT$ ${total.toLocaleString()}`;
@@ -547,7 +912,10 @@ function calculateBudget() {
 
     // Dynamic Optimization Advice
     let advice = "";
-    if (transport > 4500) {
+    const foodPerPersonPerDay = food / 4 / 5;
+    if (foodPerPersonPerDay < 1000) {
+        advice += `⚠️ 餐飲預算換算後為每人每天約 NT$${Math.round(foodPerPersonPerDay)}（約 ¥${Math.round(foodPerPersonPerDay * 4.8)}）。但 Day 2 銀座鍋爸吃到飽單餐就要 ¥3,500~5,000/人，那天勢必超支。建議把餐飲拉到 NT$22,000 以上，或將鍋爸改為備案的三越美食街。`;
+    } else if (transport > 4500) {
         advice += "💡 您的交通預算偏高，建議善用東京地鐵 72 小時券 (大人只需 ¥1,500/約 NT$320)，因為兩位孩子皆為國高中生，皆適用成人票價，因此使用 72 小時地鐵券更是劃算！";
     } else if (tickets > 8000) {
         advice += "💡 門票預算稍高。本行程精選了免費的東京都廳展望台（省下晴空塔昂貴門票）以及極便宜的葛西臨海水族館（門票僅 ¥700）。建議多利用這些公立或免費景點來維持高 CP 值。";
@@ -560,9 +928,155 @@ function calculateBudget() {
     cpAdviceText.textContent = advice;
 }
 
-[bgFlights, bgHotel, bgFood, bgTickets, bgTransport].forEach(input => {
+[bgFlights, bgHotel, bgFood, bgTickets, bgTransport, bgShopping].forEach(input => {
     input.addEventListener('input', calculateBudget);
 });
+
+// ============================================================
+// 行前準備駕駛艙：倒數計時 + 分階段互動清單 + 緊急聯絡欄位
+// ============================================================
+
+function updateCountdown() {
+    const valueEl = document.getElementById('countdown-value');
+    const subEl = document.getElementById('countdown-sub');
+    if (!valueEl || !subEl) return;
+
+    const diff = TRIP_DEPART - new Date();
+
+    if (diff <= 0) {
+        valueEl.textContent = '出發！';
+        subEl.textContent = '祝旅途平安順利，玩得盡興 ✈️';
+        return;
+    }
+
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const minutes = Math.floor((diff % 3600000) / 60000);
+
+    valueEl.innerHTML = `${days}<small> 天 </small>${hours}<small> 時 </small>${minutes}<small> 分</small>`;
+
+    if (days > 14) {
+        subEl.textContent = '時間充裕 ─ 先把「階段一」的護照、託運行李與接送車搞定';
+    } else if (days > 7) {
+        subEl.textContent = '進入 7 天倒數 ─ Visit Japan Web 與網路卡該下單了';
+    } else if (days > 3) {
+        subEl.textContent = '剩不到一週 ─ 開始打包，並確認 Obon 期間店家營業日';
+    } else if (days > 0) {
+        subEl.textContent = '最後衝刺 ─ 文件截圖、行動電源手提、出發前一晚務必補眠';
+    } else {
+        subEl.textContent = '今天出發！護照、錢包、手機三樣缺一不可';
+    }
+}
+
+function renderPrepChecklist() {
+    const container = document.getElementById('prep-checklist');
+    if (!container) return;
+
+    container.innerHTML = prepData.map(phase => `
+        <div class="prep-phase ${phase.tone}">
+            <div class="prep-phase-head">
+                <h3><i class="fas ${phase.icon}"></i> ${phase.phase}</h3>
+                <span class="prep-deadline">${phase.deadline}</span>
+            </div>
+            <ul class="prep-items">
+                ${phase.items.map(item => `
+                    <li class="prep-item">
+                        <input type="checkbox" id="${item.id}" data-prep="1">
+                        <label for="${item.id}">
+                            <span class="prep-item-title">${item.title}</span>
+                            <span class="prep-item-desc">${md(item.desc)}</span>
+                        </label>
+                    </li>
+                `).join('')}
+            </ul>
+        </div>
+    `).join('');
+
+    // 還原勾選狀態並掛上儲存事件
+    container.querySelectorAll('input[data-prep]').forEach(box => {
+        box.checked = localStorage.getItem(box.id) === 'true';
+        box.addEventListener('change', function () {
+            localStorage.setItem(this.id, this.checked);
+            updatePrepProgress();
+        });
+    });
+
+    updatePrepProgress();
+}
+
+function updatePrepProgress() {
+    const boxes = document.querySelectorAll('#prep-checklist input[data-prep]');
+    const total = boxes.length;
+    if (!total) return;
+
+    const done = Array.from(boxes).filter(b => b.checked).length;
+    const pct = Math.round((done / total) * 100);
+
+    document.getElementById('prep-progress-text').textContent = `行前準備完成度　${done} / ${total} 項`;
+    document.getElementById('prep-progress-pct').textContent = `${pct}%`;
+    document.getElementById('prep-progress-fill').style.width = `${pct}%`;
+}
+
+// ---------- Plan B 備案作戰室 ----------
+function renderPlanB() {
+    const tabsEl = document.getElementById('planb-tabs');
+    const contentEl = document.getElementById('planb-content');
+    if (!tabsEl || !contentEl) return;
+
+    tabsEl.innerHTML = contingencyData.map(cat => `
+        <button class="tab-btn planb-tab ${cat.id === currentPlanB ? 'active' : ''}" data-planb="${cat.id}">
+            <i class="fas ${cat.icon}"></i>
+            <span class="tab-day">${cat.label}</span>
+        </button>
+    `).join('');
+
+    const cat = contingencyData.find(c => c.id === currentPlanB);
+    if (!cat) return;
+
+    contentEl.innerHTML = `
+        <div class="planb-note"><i class="fas fa-circle-info"></i><p>${md(cat.note)}</p></div>
+        <div class="planb-grid">
+            ${cat.items.map(item => `
+                <div class="planb-card">
+                    <h4>${item.title}</h4>
+                    <div class="planb-row">
+                        <span class="planb-tag trigger">觸發</span>
+                        <p>${md(item.trigger)}</p>
+                    </div>
+                    <div class="planb-row">
+                        <span class="planb-tag action">立刻做</span>
+                        <p>${md(item.action)}</p>
+                    </div>
+                    <div class="planb-alts">
+                        <span class="planb-alts-title"><i class="fas fa-shuffle"></i> 替代方案</span>
+                        <ul>${item.alts.map(a => `<li>${md(a)}</li>`).join('')}</ul>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+
+    tabsEl.querySelectorAll('[data-planb]').forEach(btn => {
+        btn.addEventListener('click', function () {
+            currentPlanB = this.getAttribute('data-planb');
+            renderPlanB();
+        });
+    });
+}
+
+// 緊急聯絡電話（使用者自行填入，存在本機）
+const emergencyFields = ['em-office', 'em-card', 'em-insurance'];
+
+function initEmergencyFields() {
+    emergencyFields.forEach(id => {
+        const input = document.getElementById(id);
+        if (!input) return;
+        input.value = localStorage.getItem(id) || '';
+        input.addEventListener('input', function () {
+            localStorage.setItem(id, this.value);
+        });
+    });
+}
 
 // Checklist State Persistence (Local Storage)
 const packingItems = [
@@ -588,4 +1102,11 @@ document.addEventListener('DOMContentLoaded', () => {
     renderItinerary(currentDay);
     calculateBudget();
     initChecklist();
+
+    // 行前準備駕駛艙
+    renderPrepChecklist();
+    renderPlanB();
+    initEmergencyFields();
+    updateCountdown();
+    setInterval(updateCountdown, 30000); // 每 30 秒更新一次倒數
 });

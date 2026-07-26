@@ -223,6 +223,17 @@ input:checked + .slider:before {
     border-left: 4px solid var(--primary);
 }
 
+.alert-badge.obon-warning {
+    background: rgba(239, 68, 68, 0.22);
+    border-left: 4px solid var(--danger);
+    max-width: 520px;
+}
+
+.badge-warn {
+    background: rgba(239, 68, 68, 0.15);
+    color: var(--danger);
+}
+
 .alert-badge i {
     font-size: 1.3rem;
     flex-shrink: 0;
@@ -987,6 +998,505 @@ input:checked + .slider:before {
     .split-route-container {
         grid-template-columns: 1fr;
         gap: 0.75rem;
+    }
+}
+
+/* ============================================================
+   Pre-trip Preparation Cockpit (行前準備駕駛艙)
+   ============================================================ */
+.prep-section {
+    grid-column: 1 / -1;
+}
+
+.prep-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    border-bottom: 1px solid var(--border-card);
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.prep-header-text {
+    flex: 1 1 380px;
+}
+
+.prep-header h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.4rem;
+}
+
+.prep-header .section-desc {
+    margin-bottom: 0;
+}
+
+/* Countdown */
+.countdown-box {
+    flex: 0 0 auto;
+    min-width: 280px;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.12), rgba(245, 158, 11, 0.12));
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    border-radius: 16px;
+    padding: 1.1rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    text-align: center;
+}
+
+.countdown-label {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+}
+
+.countdown-value {
+    font-family: 'Outfit', sans-serif;
+    font-size: 2.1rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1.15;
+}
+
+.countdown-value small {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.countdown-sub {
+    font-size: 0.78rem;
+    color: var(--accent);
+    font-weight: 600;
+}
+
+/* Progress bar */
+.prep-progress {
+    margin-bottom: 1.75rem;
+}
+
+.prep-progress-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+#prep-progress-pct {
+    color: var(--success);
+    font-size: 1.1rem;
+    font-family: 'Outfit', sans-serif;
+}
+
+.prep-progress-bar {
+    height: 10px;
+    border-radius: 50px;
+    background: rgba(148, 163, 184, 0.18);
+    overflow: hidden;
+}
+
+.prep-progress-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 50px;
+    background: linear-gradient(90deg, var(--primary), var(--success));
+    transition: width 0.35s ease;
+}
+
+/* Phase cards */
+.prep-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.25rem;
+}
+
+.prep-phase {
+    background: rgba(148, 163, 184, 0.03);
+    border: 1px solid var(--border-card);
+    border-radius: 16px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+}
+
+.prep-phase.urgent {
+    border-color: rgba(239, 68, 68, 0.35);
+    background: rgba(239, 68, 68, 0.04);
+}
+
+.prep-phase.final {
+    border-color: rgba(245, 158, 11, 0.35);
+    background: rgba(245, 158, 11, 0.04);
+}
+
+.prep-phase-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    border-bottom: 1px dashed var(--border-card);
+    padding-bottom: 0.6rem;
+}
+
+.prep-phase-head h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.prep-phase.urgent .prep-phase-head h3 { color: var(--danger); }
+.prep-phase.final .prep-phase-head h3 { color: var(--accent); }
+
+.prep-deadline {
+    flex-shrink: 0;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 50px;
+    background: rgba(59, 130, 246, 0.12);
+    color: var(--primary);
+}
+
+.prep-phase.urgent .prep-deadline {
+    background: rgba(239, 68, 68, 0.12);
+    color: var(--danger);
+}
+
+.prep-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.prep-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    padding: 0.7rem 0.8rem;
+    border-radius: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+}
+
+.prep-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    border-radius: 6px;
+    cursor: pointer;
+    accent-color: var(--success);
+    flex-shrink: 0;
+}
+
+.prep-item label {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    user-select: none;
+}
+
+.prep-item-title {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-main);
+    line-height: 1.35;
+}
+
+.prep-item-desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.prep-item input:checked + label .prep-item-title {
+    text-decoration: line-through;
+    color: var(--text-muted);
+}
+
+.prep-item input:checked + label {
+    opacity: 0.55;
+}
+
+/* Emergency block */
+.emergency-block {
+    margin-top: 2rem;
+    border-top: 1px solid var(--border-card);
+    padding-top: 1.5rem;
+}
+
+.emergency-block h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--danger);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.1rem;
+}
+
+.emergency-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.1rem;
+}
+
+.emergency-card {
+    background: rgba(239, 68, 68, 0.04);
+    border: 1px solid rgba(239, 68, 68, 0.18);
+    border-radius: 16px;
+    padding: 1.1rem;
+}
+
+.emergency-card h4 {
+    font-size: 0.92rem;
+    font-weight: 700;
+    margin-bottom: 0.7rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.emergency-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.emergency-card li {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    padding-left: 0.85rem;
+    position: relative;
+}
+
+.emergency-card li::before {
+    content: "▸";
+    color: var(--danger);
+    position: absolute;
+    left: 0;
+}
+
+.emergency-card.fill-in {
+    background: rgba(59, 130, 246, 0.04);
+    border-color: rgba(59, 130, 246, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.emergency-card.fill-in label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-top: 0.3rem;
+}
+
+.emergency-card.fill-in input {
+    width: 100%;
+    padding: 0.55rem 0.8rem;
+    border-radius: 10px;
+    border: 1px solid var(--tab-border);
+    background: transparent;
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    font-weight: 600;
+    outline: none;
+}
+
+.emergency-card.fill-in input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.fill-in-note {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    line-height: 1.45;
+    margin-top: 0.6rem;
+}
+
+@media (max-width: 576px) {
+    .countdown-box {
+        min-width: 100%;
+    }
+    .countdown-value {
+        font-size: 1.7rem;
+    }
+}
+
+/* ============================================================
+   Plan B 備案作戰室 (Contingency War Room)
+   ============================================================ */
+.contingency-section {
+    grid-column: 1 / -1;
+}
+
+.planb-tab {
+    flex-direction: row !important;
+    gap: 0.45rem !important;
+    min-width: 140px;
+}
+
+.planb-tab i {
+    font-size: 0.9rem;
+}
+
+.planb-note {
+    display: flex;
+    gap: 0.8rem;
+    align-items: flex-start;
+    background: rgba(245, 158, 11, 0.07);
+    border: 1px dashed rgba(245, 158, 11, 0.35);
+    border-radius: 14px;
+    padding: 1rem 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.planb-note i {
+    color: var(--accent);
+    font-size: 1.05rem;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.planb-note p {
+    font-size: 0.86rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+.planb-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 1.25rem;
+}
+
+.planb-card {
+    background: rgba(148, 163, 184, 0.03);
+    border: 1px solid var(--border-card);
+    border-radius: 16px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.planb-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px -5px rgba(0, 0, 0, 0.08);
+}
+
+.planb-card h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-main);
+    line-height: 1.4;
+    border-bottom: 1px dashed var(--border-card);
+    padding-bottom: 0.7rem;
+}
+
+.planb-row {
+    display: flex;
+    gap: 0.7rem;
+    align-items: flex-start;
+}
+
+.planb-row p {
+    font-size: 0.84rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+}
+
+.planb-tag {
+    flex-shrink: 0;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    margin-top: 2px;
+    letter-spacing: 0.5px;
+}
+
+.planb-tag.trigger {
+    background: rgba(239, 68, 68, 0.12);
+    color: var(--danger);
+}
+
+.planb-tag.action {
+    background: rgba(245, 158, 11, 0.14);
+    color: var(--accent);
+}
+
+.planb-alts {
+    background: rgba(16, 185, 129, 0.05);
+    border: 1px solid rgba(16, 185, 129, 0.18);
+    border-radius: 12px;
+    padding: 0.9rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.planb-alts-title {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--success);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.planb-alts ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.planb-alts li {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+    padding-left: 1rem;
+    position: relative;
+}
+
+.planb-alts li::before {
+    content: "→";
+    color: var(--success);
+    position: absolute;
+    left: 0;
+    font-weight: 700;
+}
+
+@media (max-width: 576px) {
+    .planb-grid {
+        grid-template-columns: 1fr;
+    }
+    .planb-tab {
+        min-width: 120px;
     }
 }
 

@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 本頁含航班、住宿與出遊日期等家庭資訊，僅供分享連結給家人使用，不希望被搜尋引擎收錄。
+         若之後想讓它能被 Google 搜到，刪掉下面這一行即可。 -->
+    <meta name="robots" content="noindex, nofollow">
     <title>東京 5 天 4 夜親子高 CP 值自由行指南</title>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,12 +44,85 @@
                     <i class="fas fa-bed"></i>
                     <span><strong>紅眼班機提醒：</strong> 首日上午排空、下午補眠，是帶小孩出遊的生存關鍵。</span>
                 </div>
+                <div class="alert-badge obon-warning">
+                    <i class="fas fa-calendar-times"></i>
+                    <span><strong>Obon 連假警戒：</strong> 8/11 為日本「山之日」國定假日，8/13–8/16 為盂蘭盆節。連鎖店照常，但個人老店（如淺草釜飯むつみ、Roast Beef Ono）公休機率高，務必逐家確認營業日！</span>
+                </div>
             </div>
         </div>
     </header>
 
     <!-- Main Container -->
     <main class="main-container">
+        <!-- Pre-trip Preparation Cockpit (行前準備駕駛艙 / v1.8) -->
+        <section class="prep-section card">
+            <div class="prep-header">
+                <div class="prep-header-text">
+                    <h2><i class="fas fa-clipboard-check"></i> 行前準備駕駛艙</h2>
+                    <p class="section-desc">依「距離出發還剩幾天」分成 5 個階段。勾選會自動記憶在這台裝置上，全家可以照著同一份清單推進。</p>
+                </div>
+                <div class="countdown-box">
+                    <span class="countdown-label"><i class="fas fa-hourglass-half"></i> 距離桃機 T1 集合 (8/11 00:40)</span>
+                    <span class="countdown-value" id="countdown-value">--</span>
+                    <span class="countdown-sub" id="countdown-sub">計算中…</span>
+                </div>
+            </div>
+
+            <div class="prep-progress">
+                <div class="prep-progress-top">
+                    <span id="prep-progress-text">行前準備完成度</span>
+                    <span id="prep-progress-pct">0%</span>
+                </div>
+                <div class="prep-progress-bar"><div class="prep-progress-fill" id="prep-progress-fill"></div></div>
+            </div>
+
+            <div class="prep-grid" id="prep-checklist">
+                <!-- Dynamically populated by app.js -->
+            </div>
+
+            <!-- Emergency & Lost-contact SOP -->
+            <div class="emergency-block">
+                <h3><i class="fas fa-life-ring"></i> 緊急聯絡與失聯 SOP（出事前先看，出事時來不及看）</h3>
+                <div class="emergency-grid">
+                    <div class="emergency-card">
+                        <h4><i class="fas fa-phone-volume"></i> 日本境內直撥（免費）</h4>
+                        <ul>
+                            <li><strong>110</strong> ─ 報警（遺失、竊盜、走失報案）</li>
+                            <li><strong>119</strong> ─ 火災與救護車（同一支號碼）</li>
+                            <li><strong>171</strong> ─ 災害用留言板，颱風或地震時互報平安</li>
+                        </ul>
+                    </div>
+                    <div class="emergency-card">
+                        <h4><i class="fas fa-passport"></i> 護照遺失處理順序</h4>
+                        <ul>
+                            <li>① 就近警察署報案，取得<strong>遺失證明（紛失届受理証明書）</strong></li>
+                            <li>② 帶證明＋護照影本＋大頭照，到台北駐日經濟文化代表處申請「入國證明書」</li>
+                            <li>③ 這就是為什麼行前要備<strong>護照影本與 2 張大頭照，且與正本分開放</strong></li>
+                        </ul>
+                    </div>
+                    <div class="emergency-card">
+                        <h4><i class="fas fa-users"></i> 分流走失 SOP（Day 2/3/4 適用）</h4>
+                        <ul>
+                            <li>① <strong>原地不動 10 分鐘</strong>，不要邊走邊找，會越走越遠</li>
+                            <li>② 開 LINE 即時位置分享，群組報自己在哪一層樓、哪家店</li>
+                            <li>③ 還是找不到 → <strong>各自前往當日「集合地點」</strong>等，不要自行返回飯店</li>
+                            <li>④ 手機沒電 → 向店員借用市內電話打飯店，請櫃檯轉達</li>
+                        </ul>
+                    </div>
+                    <div class="emergency-card fill-in">
+                        <h4><i class="fas fa-pen-to-square"></i> 出發前請自行填入（會自動儲存）</h4>
+                        <label for="em-office">台北駐日經濟文化代表處 急難救助行動電話</label>
+                        <input type="text" id="em-office" placeholder="請至代表處官網抄下最新號碼">
+                        <label for="em-card">信用卡海外掛失專線</label>
+                        <input type="text" id="em-card" placeholder="例如：+886-2-xxxx-xxxx">
+                        <label for="em-insurance">旅平險／不便險 24 小時理賠專線</label>
+                        <input type="text" id="em-insurance" placeholder="保單上的海外服務電話">
+                        <p class="fill-in-note">※ 急難救助電話各單位會異動，本頁不預填號碼，請出發前親自到官網確認再填，避免抄到失效號碼。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Sidebar Quick Navigation & Stats -->
         <section class="overview-section card">
             <div class="card-body">
@@ -75,6 +151,7 @@
                     <ul>
                         <li><span class="badge badge-primary">地鐵 & JR 票價</span>：因兩位孩子分別升國一與升高一，在日皆須購買<strong>大人票價（成人票）</strong>。</li>
                         <li><span class="badge badge-primary">Tokyo Subway Ticket 72小時券</span>：大人 ¥1,500，可 72 小時地鐵無限搭乘，建議人手一張。</li>
+                        <li><span class="badge badge-warn">啟用時機（重要）</span>：Day 1 幾乎全程在秋葉原步行、用不到地鐵。<strong>請忍到 8/12 早上去淺草時才第一次刷卡啟用</strong>，效期即可撐到 8/15 上午轉 Skyliner 那段，完整吃滿 Day 2~Day 5。一落地就啟用會在 8/14 上午失效，白白浪費兩天。</li>
                         <li><span class="badge badge-accent">Welcome Suica</span>：免押金，搭乘 JR（如山手線）與部分私鐵專用。</li>
                         <li><strong>省錢提示：</strong> 全程使用地鐵券，JR 刷 Suica 做輔助，是 CP 值最高的搭配。</li>
                     </ul>
@@ -177,6 +254,22 @@
             </div>
         </section>
 
+        <!-- Plan B Contingency War Room (備案作戰室 / v1.9) -->
+        <section class="contingency-section card">
+            <h2><i class="fas fa-shield-halved"></i> Plan B 備案作戰室</h2>
+            <p class="section-desc">當初點出的每個風險，這裡都給出「觸發條件 → 立刻做什麼 → 換去哪裡」。出發前全家看一遍，現場才不會慌。</p>
+
+            <div class="tabs-container">
+                <div class="tabs-scroll" id="planb-tabs">
+                    <!-- Dynamically populated by app.js -->
+                </div>
+            </div>
+
+            <div id="planb-content" class="planb-content">
+                <!-- Dynamically populated by app.js -->
+            </div>
+        </section>
+
         <!-- Budget Planner Section -->
         <section class="budget-section card">
             <h2><i class="fas fa-calculator"></i> 親子高 CP 值預算計算器</h2>
@@ -218,6 +311,13 @@
                         <div class="input-wrapper">
                             <span class="currency">NT$</span>
                             <input type="number" id="bg-transport" value="3500" min="0">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="bg-shopping"><i class="fas fa-gift"></i> 購物與伴手禮預算 (唐吉訶德/DULTON/任天堂)</label>
+                        <div class="input-wrapper">
+                            <span class="currency">NT$</span>
+                            <input type="number" id="bg-shopping" value="20000" min="0">
                         </div>
                     </div>
                 </div>
@@ -314,6 +414,6 @@
         <p>© 2026 東京親子高 CP 值自由行指南. Designed for family of 4.</p>
     </footer>
 
-    <script src="app.js?v=1.7"></script>
+    <script src="app.js?v=1.9"></script>
 </body>
 </html>
