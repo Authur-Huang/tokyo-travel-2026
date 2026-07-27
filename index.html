@@ -14,7 +14,7 @@
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- 樣式表同樣加上版本參數排除快取，否則家人手機上的舊 CSS 會讓新版面錯位 -->
-    <link rel="stylesheet" href="style.css?v=2.2">
+    <link rel="stylesheet" href="style.css?v=2.3">
 </head>
 <body>
     <!-- Theme Toggle -->
@@ -133,9 +133,11 @@
         </section>
 
         <!-- Sidebar Quick Navigation & Stats -->
-        <section class="overview-section card">
+        <section class="overview-section card collapsible" id="overview">
             <div class="card-body">
-                <h2><i class="fas fa-info-circle"></i> 旅程基本資訊</h2>
+                <h2><i class="fas fa-info-circle"></i> 旅程基本資訊
+                    <button class="collapse-btn" type="button" data-collapse="overview"><i class="fas fa-chevron-up"></i><span>收合</span></button>
+                </h2>
                 <div class="stats-grid">
                     <div class="stat-item">
                         <span class="stat-label">去程航班 (GK012)</span>
@@ -155,7 +157,11 @@
                     </div>
                 </div>
                 
-                <div class="quick-tips-box">
+                <div class="collapsed-hint">
+                    <i class="fas fa-hand-pointer"></i> 收合了<strong>交通與票券說明</strong>（含地鐵券的啟用時機提醒）。需要時按「展開」。
+                </div>
+
+                <div class="quick-tips-box collapsible-body">
                     <h3><i class="fas fa-lightbulb"></i> 交通與票券說明</h3>
                     <ul>
                         <li><span class="badge badge-primary">地鐵 & JR 票價</span>：因兩位孩子分別升國一與升高一，在日皆須購買<strong>大人票價（成人票）</strong>。</li>
@@ -507,6 +513,6 @@
         <p style="margin-top: 0.75rem;">© 2026 東京親子高 CP 值自由行指南. Designed for family of 4.</p>
     </footer>
 
-    <script src="app.js?v=2.2"></script>
+    <script src="app.js?v=2.3"></script>
 </body>
 </html>
