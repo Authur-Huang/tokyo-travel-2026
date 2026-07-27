@@ -1905,9 +1905,10 @@ input:checked + .slider:before {
     .reminders-section { order: 3; }
     .itinerary-section { order: 4; }
     .contingency-section { order: 5; }
-    .budget-section    { order: 6; }
-    .checklist-section { order: 7; }
-    .konbini-section   { order: 8; }
+    .local-section     { order: 6; }
+    .budget-section    { order: 7; }
+    .checklist-section { order: 8; }
+    .konbini-section   { order: 9; }
 
     /* 旅程期間（8/11-8/15）：每日行程與超商清單自動移到最前面 */
     body.trip-mode .itinerary-section { order: 0; }
@@ -1916,6 +1917,235 @@ input:checked + .slider:before {
     body.trip-mode .overview-section  { order: 3; }
     body.trip-mode .prep-section      { order: 7; }
     body.trip-mode .reminders-section { order: 8; }
+}
+
+/* ============================================================
+   日本當地採購總整理 (Local Spending Guide)
+   ============================================================ */
+.local-section {
+    grid-column: 1 / -1;
+}
+
+.local-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 1.75rem;
+}
+
+.local-sum-item {
+    background: rgba(148, 163, 184, 0.05);
+    border: 1px solid var(--border-card);
+    border-radius: 12px;
+    padding: 0.85rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.local-sum-item span {
+    font-size: 0.76rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.local-sum-item strong {
+    font-size: 1.05rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    color: var(--text-main);
+}
+
+.local-sum-item.total {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.35);
+}
+
+.local-sum-item.total strong {
+    color: var(--primary);
+}
+
+.local-card {
+    background: rgba(148, 163, 184, 0.03);
+    border: 1px solid var(--border-card);
+    border-radius: 16px;
+    padding: 1.4rem;
+    margin-bottom: 1.25rem;
+}
+
+.local-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.local-rank {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.local-finding {
+    display: flex;
+    gap: 0.8rem;
+    align-items: flex-start;
+    background: rgba(245, 158, 11, 0.08);
+    border: 1px dashed rgba(245, 158, 11, 0.4);
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.local-finding i {
+    color: var(--accent);
+    font-size: 1.05rem;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.local-finding p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+.local-verdict {
+    background: rgba(16, 185, 129, 0.08);
+    border-left: 4px solid var(--success);
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    font-size: 0.88rem;
+    color: var(--text-main);
+    line-height: 1.55;
+    margin-bottom: 1rem;
+}
+
+.local-verdict i {
+    color: var(--success);
+    margin-right: 0.4rem;
+}
+
+.local-note {
+    font-size: 0.84rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0.9rem 0;
+}
+
+.local-note i {
+    color: var(--accent);
+    margin-right: 0.3rem;
+}
+
+/* 表格 ─ 窄螢幕時自己橫向捲動，不讓整頁跑版 */
+.local-table-wrap {
+    overflow-x: auto;
+    margin: 1rem 0;
+    -webkit-overflow-scrolling: touch;
+}
+
+.local-table {
+    width: 100%;
+    min-width: 520px;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+}
+
+.local-table th,
+.local-table td {
+    padding: 0.7rem 0.8rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-card);
+    color: var(--text-muted);
+    line-height: 1.45;
+}
+
+.local-table th {
+    background: rgba(148, 163, 184, 0.08);
+    color: var(--text-main);
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.local-table td small {
+    font-size: 0.72rem;
+    opacity: 0.8;
+}
+
+.local-table tr.best td {
+    background: rgba(16, 185, 129, 0.08);
+    color: var(--text-main);
+}
+
+.local-traps {
+    background: rgba(148, 163, 184, 0.04);
+    border: 1px solid var(--border-card);
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
+    margin-top: 0.9rem;
+}
+
+.local-traps.danger {
+    background: rgba(239, 68, 68, 0.05);
+    border-color: rgba(239, 68, 68, 0.25);
+}
+
+.local-traps h4 {
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-bottom: 0.6rem;
+}
+
+.local-traps.danger h4 {
+    color: var(--danger);
+}
+
+.local-traps ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.local-traps li {
+    font-size: 0.83rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    padding-left: 1rem;
+    position: relative;
+}
+
+.local-traps li::before {
+    content: "▸";
+    color: var(--accent);
+    position: absolute;
+    left: 0;
+}
+
+.local-traps.danger li::before {
+    color: var(--danger);
+}
+
+.local-traps a {
+    color: var(--primary);
+    font-weight: 600;
 }
 
 /* Horizontal Grid Layout for Reminders */

@@ -785,9 +785,8 @@ const toggleRouteBtn = document.getElementById('toggle-route-btn');
 const itineraryContent = document.getElementById('itinerary-content');
 const tabButtons = document.querySelectorAll('.tab-btn');
 
-// Budget inputs
-const bgFlights = document.getElementById('bg-flights');
-const bgHotel = document.getElementById('bg-hotel');
+// Budget inputs（機票與住宿已訂妥，不列入計算）
+const bgEsim = document.getElementById('bg-esim');
 const bgFood = document.getElementById('bg-food');
 const bgTickets = document.getElementById('bg-tickets');
 const bgTransport = document.getElementById('bg-transport');
@@ -909,14 +908,13 @@ toggleRouteBtn.addEventListener('click', function() {
 
 // Budget Calculator Logic
 function calculateBudget() {
-    const flights = parseFloat(bgFlights.value) || 0;
-    const hotel = parseFloat(bgHotel.value) || 0;
+    const esim = parseFloat(bgEsim.value) || 0;
     const food = parseFloat(bgFood.value) || 0;
     const tickets = parseFloat(bgTickets.value) || 0;
     const transport = parseFloat(bgTransport.value) || 0;
     const shopping = parseFloat(bgShopping.value) || 0;
 
-    const total = flights + hotel + food + tickets + transport + shopping;
+    const total = esim + food + tickets + transport + shopping;
     const perPerson = total / 4; // 2 adults + 2 kids
 
     totalBudgetEl.textContent = `NT$ ${total.toLocaleString()}`;
@@ -930,17 +928,19 @@ function calculateBudget() {
     } else if (transport > 4500) {
         advice += "💡 您的交通預算偏高，建議善用東京地鐵 72 小時券 (大人只需 ¥1,500/約 NT$320)，因為兩位孩子皆為國高中生，皆適用成人票價，因此使用 72 小時地鐵券更是劃算！";
     } else if (tickets > 8000) {
-        advice += "💡 門票預算稍高。本行程精選了免費的東京都廳展望台（省下晴空塔昂貴門票）以及極便宜的葛西臨海水族館（門票僅 ¥700）。建議多利用這些公立或免費景點來維持高 CP 值。";
-    } else if (hotel < 10000) {
-        advice += "💡 住宿預算相當精實！秋葉原附近有很多高 CP 值的親子商務旅館（如 Super Hotel、Dormy Inn 包含免費溫泉或早餐），適合家庭入住。";
+        advice += "💡 門票預算稍高。本行程精選了免門票的明治神宮、東京鐵塔外拍與各大商場，真正要付費的只有 RED° 一項。建議多利用免費景點來維持高 CP 值。";
+    } else if (esim > 2500) {
+        advice += "💡 網路預算偏高。4 人 5 天其實用不到吃到飽 ─ 飯店有 WiFi，日間主要用途是導航與 LINE，每人 3GB 的總量型 eSIM 就很夠，總計抓 NT$600-1,200 即可。";
+    } else if (shopping > 30000) {
+        advice += "💡 購物預算較寬鬆，記得把伴手禮集中在 MEGA 唐吉訶德一次結帳，湊滿免稅門檻並索取免稅單，可直接省下 10% 消費稅。";
     } else {
-        advice += "🎉 預算控制得非常完美！主打秋葉原 4 晚平價親子住宿（無額外機場飯店開銷），加上善用地鐵券，能以極佳的 CP 值完成一趟高品質的東京親子之旅！";
+        advice += `🎉 當地花費控制得很好！機票住宿已訂妥不列入，這 ${Math.round(total).toLocaleString()} 元就是實際要帶去日本花的錢，平均每人每天約 NT$${Math.round(total / 4 / 5).toLocaleString()}。詳細的省錢做法請看上方「日本當地採購總整理」。`;
     }
 
     cpAdviceText.textContent = advice;
 }
 
-[bgFlights, bgHotel, bgFood, bgTickets, bgTransport, bgShopping].forEach(input => {
+[bgEsim, bgFood, bgTickets, bgTransport, bgShopping].forEach(input => {
     input.addEventListener('input', calculateBudget);
 });
 

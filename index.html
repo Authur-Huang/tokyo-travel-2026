@@ -14,7 +14,7 @@
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- 樣式表同樣加上版本參數排除快取，否則家人手機上的舊 CSS 會讓新版面錯位 -->
-    <link rel="stylesheet" href="style.css?v=2.3">
+    <link rel="stylesheet" href="style.css?v=2.4">
 </head>
 <body>
     <!-- Theme Toggle -->
@@ -292,26 +292,176 @@
             </div>
         </section>
 
+        <!-- Local Spending Guide -->
+        <section class="local-section card" id="local">
+            <h2><i class="fas fa-yen-sign"></i> 日本當地採購總整理（CP 值排序）</h2>
+            <p class="section-desc">機票與住宿已訂妥，剩下就是這四項。<strong>每一項都標明「推薦做法」與「別踩的坑」</strong>，照著買就是目前算得出來最划算的組合。</p>
+
+            <div class="local-summary">
+                <div class="local-sum-item"><span>網路 eSIM</span><strong>NT$ 600–1,200</strong></div>
+                <div class="local-sum-item"><span>交通（含機場往返）</span><strong>NT$ 5,600</strong></div>
+                <div class="local-sum-item"><span>吃飯（11 餐）</span><strong>NT$ 23,000</strong></div>
+                <div class="local-sum-item"><span>門票</span><strong>NT$ 4,500</strong></div>
+                <div class="local-sum-item"><span>伴手禮與購物</span><strong>NT$ 20,000</strong></div>
+                <div class="local-sum-item total"><span>當地合計（4 人）</span><strong>約 NT$ 54,000</strong></div>
+            </div>
+
+            <!-- 1. 交通 -->
+            <div class="local-card">
+                <h3><span class="local-rank">1</span> 車票 ─ 金額最大，也最容易買錯</h3>
+
+                <div class="local-finding">
+                    <i class="fas fa-magnifying-glass-chart"></i>
+                    <p><strong>重新算過之後發現一件事：地鐵券沒有想像中划算。</strong>你們的行程 <strong>Day 1 全程在秋葉原步行、Day 4 走的是 JR 山手線與東急東橫線（地鐵券都不能用）、Day 5 只搭 1 站</strong>。地鐵券真正發揮價值的其實只有 <strong>Day 2 與 Day 3</strong>。</p>
+                </div>
+
+                <p class="local-verdict"><i class="fas fa-circle-check"></i> 推薦：直接買京成的 <strong>「Skyliner &amp; Tokyo Subway Ticket」套票（Skyliner 往復 + 地鐵 72 小時券）</strong></p>
+
+                <div class="local-table-wrap">
+                    <table class="local-table">
+                        <thead><tr><th>方案</th><th>單人</th><th>4 人合計</th><th>說明</th></tr></thead>
+                        <tbody>
+                            <tr class="best">
+                                <td><strong>套票：Skyliner 往復 + 地鐵 72h</strong></td>
+                                <td>¥6,100</td>
+                                <td>¥24,400<br><small>≈ NT$5,100</small></td>
+                                <td>對號座、行李有處放，去回程都不用擠</td>
+                            </tr>
+                            <tr>
+                                <td>分開買：Skyliner 往復 + 地鐵 72h</td>
+                                <td>¥6,634</td>
+                                <td>¥26,536</td>
+                                <td><strong>比套票貴 ¥2,136（約 NT$450）</strong></td>
+                            </tr>
+                            <tr>
+                                <td>最省：Access 特急往復 + Suica 實付</td>
+                                <td>約 ¥3,800</td>
+                                <td>約 ¥15,200<br><small>≈ NT$3,180</small></td>
+                                <td>省 NT$1,900，但單程多 20 分鐘且沒有對號座</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="local-note"><strong>我的建議是買套票。</strong>省下的 NT$1,900 換來的是：凌晨紅眼班機落地後有位子坐、3-4 個大行李箱有地方放、回程扛滿戰利品不用站著。帶兩個孩子，這筆錢值得。</p>
+
+                <div class="local-traps">
+                    <h4><i class="fas fa-triangle-exclamation"></i> 三個坑</h4>
+                    <ul>
+                        <li><strong>兩個孩子都要買大人票。</strong>日本的兒童票（小児）只到小學六年級（11 歲），升國一與升高一都算大人。</li>
+                        <li><strong>地鐵券不要一落地就啟用。</strong>Day 1 用不到地鐵，<strong>8/12 早上去淺草時再第一次刷</strong>，效期才蓋得住 Day 2、Day 3 這兩個真正需要的日子。</li>
+                        <li><strong>地鐵券不能搭 JR 與東急。</strong>Day 1 的日暮里→秋葉原、Day 4 的整天移動都得用 Suica，<strong>每人先加值 ¥1,000 左右</strong>（已含在上面的 NT$5,600 裡）。</li>
+                    </ul>
+                </div>
+
+                <p class="local-note"><i class="fas fa-lightbulb"></i> 這張套票在成田機場的京成櫃台可買，<strong>部分 LCC 也在機上販售</strong> ─ 捷星是 LCC，上機後可以問問空服員，買到就省了排隊時間。</p>
+            </div>
+
+            <!-- 2. eSIM -->
+            <div class="local-card">
+                <h3><span class="local-rank">2</span> eSIM ─ 花小錢，但買錯會出大事</h3>
+
+                <p class="local-verdict"><i class="fas fa-circle-check"></i> 推薦：<strong>4 人各買一張「總量型」eSIM，每人 3GB 左右</strong>，預算 NT$600–1,200</p>
+
+                <div class="local-traps danger">
+                    <h4><i class="fas fa-ban"></i> 絕對不要租 WiFi 分享器</h4>
+                    <ul>
+                        <li>你們 Day 2、Day 3、Day 4 都有<strong>媽媽與孩子分流路線</strong>。一台分享器只能跟著一個人走，<strong>另一邊立刻失聯</strong> ─ 這是整份行程設計的核心，不能省這個錢。</li>
+                        <li>而且分享器要充電、要還機、掉了要賠，麻煩遠大於省下的錢。</li>
+                    </ul>
+                </div>
+
+                <div class="local-traps">
+                    <h4><i class="fas fa-triangle-exclamation"></i> 為什麼買總量型而不是吃到飽</h4>
+                    <ul>
+                        <li><strong>你們白天的用途其實很單純：</strong>Google Maps 導航、LINE 位置分享、查店家營業時間、偶爾拍照上傳。這樣一天大約 300–500MB，<strong>5 天 3GB 綽綽有餘</strong>。</li>
+                        <li><strong>飯店有 WiFi</strong>，晚上追劇、傳大量照片都留到回飯店再用，白天的流量根本用不完。</li>
+                        <li>「吃到飽」方案很多是<strong>前幾 GB 高速、超過就降速</strong>，對只用導航的人等於多付錢買用不到的東西。</li>
+                    </ul>
+                </div>
+
+                <div class="local-traps">
+                    <h4><i class="fas fa-mobile-screen"></i> 買之前先確認</h4>
+                    <ul>
+                        <li><strong>手機要支援 eSIM</strong>：iPhone XS（2018 年）以後的機型都支援。<strong>孩子的手機如果是舊機或 Android 不支援，就改買實體上網卡</strong>，價格差不多。</li>
+                        <li>手機不能是<strong>電信商鎖卡機</strong>（台灣現在多數是無鎖，但綁約機要確認）。</li>
+                        <li><strong>eSIM 要在出發前就裝好</strong>（掃 QR Code），不要等落地才弄 ─ 那時候你沒有網路可以下載設定檔。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 3. 吃飯錢 -->
+            <div class="local-card">
+                <h3><span class="local-rank">3</span> 吃飯錢 ─ 最大的變動項，也最好控制</h3>
+
+                <p class="local-verdict"><i class="fas fa-circle-check"></i> 目標每人每餐 <strong>NT$300–400（約 ¥1,400–1,900）</strong>，11 餐基本盤約 NT$15,400，加上一餐升級與每天的飲料零食，抓 <strong>NT$23,000</strong> 有餘裕</p>
+
+                <div class="local-traps">
+                    <h4><i class="fas fa-piggy-bank"></i> 四個省錢做法（不犧牲體驗）</h4>
+                    <ul>
+                        <li><strong>早餐一律在飯店吃</strong> ─ 已含在房費裡，等於免費的 4 餐，出去外面吃就是白白多花錢。</li>
+                        <li><strong>每天挑一餐用便利商店</strong> ─ 一人 ¥500–800（NT$105–170），5 天下來可省約 NT$2,000–3,000。<a href="#konbini">必買清單在這裡</a>。</li>
+                        <li><strong>百貨地下超市（デパ地下）下午 5 點後常有半價</strong> ─ 熟食便當品質好、份量足，找個休息區坐下吃還能順便避暑。</li>
+                        <li><strong>Day 4 午餐的麺散只要 ¥1,000–1,500</strong>，是全行程最省的一餐，且是 IG 名單命中的店，省錢又不委屈。</li>
+                    </ul>
+                </div>
+
+                <div class="local-traps">
+                    <h4><i class="fas fa-triangle-exclamation"></i> 唯一要小心的一餐</h4>
+                    <ul>
+                        <li><strong>銀座鍋爸吃到飽 ¥3,500–5,000/人</strong>，是唯一嚴重破線的一餐，4 人一餐就 NT$2,900–4,160。</li>
+                        <li>如果想吃高單價的，<strong>建議把這筆錢挪去澀谷「立喰鮨かきだ」</strong> ─ 同樣價位，但大トロ、海膽吃到飽，孩子的滿足感高很多，而且就在 Day 4 唐吉訶德的同一個路口。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 4. 伴手禮 -->
+            <div class="local-card">
+                <h3><span class="local-rank">4</span> 伴手禮 ─ 關鍵在「集中結帳」</h3>
+
+                <p class="local-verdict"><i class="fas fa-circle-check"></i> 推薦：<strong>Day 4 傍晚在 MEGA 唐吉訶德澀谷本店一次買齊、一次結帳</strong>，湊滿免稅門檻</p>
+
+                <div class="local-traps">
+                    <h4><i class="fas fa-receipt"></i> 免稅這件事直接省 10%</h4>
+                    <ul>
+                        <li>日本一般物品的免稅門檻是<strong>單店單日消費滿 ¥5,000（未稅）</strong>。你們 4 人的伴手禮預算 NT$20,000，<strong>集中在一家店結帳一定湊得到</strong>，等於直接省下 10% 消費稅。</li>
+                        <li><strong>分散在好幾家店零買，每家都湊不到門檻</strong>，還容易重複買 ─ 這是最常見的浪費。</li>
+                        <li>結帳時<strong>要出示護照</strong>（記得帶，不是影本）。<strong>免稅制度近年持續有調整，結帳前先問一下店員當日規則。</strong></li>
+                    </ul>
+                </div>
+
+                <div class="local-traps">
+                    <h4><i class="fas fa-star"></i> 高 CP 值的具體品項</h4>
+                    <ul>
+                        <li><strong>7-11 的砂糖樹餅乾（シュガーバターの木）</strong> ─ 3 個入獨立包裝、便宜、好分送，是超商必買清單裡<strong>唯一能扛回台灣的一樣</strong>（冰品布丁都得當場吃掉）。看到就掃貨，它很難買。</li>
+                        <li><strong>藥妝集中在唐吉訶德比價</strong> ─ 和松本清各有便宜的品項，但為了湊免稅門檻，還是建議集中在一家。</li>
+                        <li><strong>機場免稅店最貴</strong>，只留給「真的忘記買」的東西，不要把主力採購留到最後。</li>
+                    </ul>
+                </div>
+
+                <div class="local-traps danger">
+                    <h4><i class="fas fa-suitcase-rolling"></i> 買之前先想行李</h4>
+                    <ul>
+                        <li>捷星是廉航，<strong>回程託運行李務必事前加購到 30kg</strong>，臨櫃補買貴 2–3 倍 ─ 這一筆常常比省下來的免稅還多。</li>
+                        <li>行李箱裡先放一個<strong>可折疊旅行袋</strong>，超重時把衣物移出來當手提，這是最省錢的一招。</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
         <!-- Budget Planner Section -->
         <section class="budget-section card" id="budget">
             <h2><i class="fas fa-calculator"></i> 親子高 CP 值預算計算器</h2>
-            <p class="section-desc">已為您預填 4 人 (2大2小) 的估計花費 (單位：新台幣 NTD)。您可以隨時修改數值以符合您的預算！</p>
+            <p class="section-desc"><strong>機票與住宿已訂妥，不再列入計算。</strong>以下只算「到了日本才要花的錢」，4 人 (2大2小)，單位新台幣。數值可隨時修改。</p>
             
             <div class="budget-container">
                 <!-- Input Fields -->
                 <div class="budget-inputs">
                     <div class="input-group">
-                        <label for="bg-flights"><i class="fas fa-plane"></i> 機票總花費 (紅眼促銷票估計)</label>
+                        <label for="bg-esim"><i class="fas fa-sim-card"></i> 網路 eSIM (4 人各自獨立，分流必備)</label>
                         <div class="input-wrapper">
                             <span class="currency">NT$</span>
-                            <input type="number" id="bg-flights" value="38000" min="0">
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <label for="bg-hotel"><i class="fas fa-hotel"></i> 住宿總花費 (秋葉原 4 晚)</label>
-                        <div class="input-wrapper">
-                            <span class="currency">NT$</span>
-                            <input type="number" id="bg-hotel" value="13000" min="0">
+                            <input type="number" id="bg-esim" value="1000" min="0">
                         </div>
                     </div>
                     <div class="input-group">
@@ -329,10 +479,10 @@
                         </div>
                     </div>
                     <div class="input-group">
-                        <label for="bg-transport"><i class="fas fa-subway"></i> 交通總花費 (Subway Ticket + Suica)</label>
+                        <label for="bg-transport"><i class="fas fa-subway"></i> 交通 (Skyliner 套票 + JR/私鐵 Suica)</label>
                         <div class="input-wrapper">
                             <span class="currency">NT$</span>
-                            <input type="number" id="bg-transport" value="3500" min="0">
+                            <input type="number" id="bg-transport" value="5600" min="0">
                         </div>
                     </div>
                     <div class="input-group">
@@ -347,8 +497,8 @@
                 <!-- Budget Summary -->
                 <div class="budget-summary">
                     <div class="summary-card">
-                        <span class="summary-title">預估總花費 (4人)</span>
-                        <span class="summary-value" id="total-budget">NT$ 80,500</span>
+                        <span class="summary-title">當地預估總花費 (4人，不含機票住宿)</span>
+                        <span class="summary-value" id="total-budget">NT$ 54,100</span>
                     </div>
                     <div class="summary-card secondary">
                         <span class="summary-title">每人平均花費</span>
@@ -503,7 +653,7 @@
         <a href="#prep"><i class="fas fa-clipboard-check"></i><span>行前</span></a>
         <a href="#itinerary" class="qn-primary"><i class="fas fa-calendar-alt"></i><span>行程</span></a>
         <a href="#planb"><i class="fas fa-shield-halved"></i><span>備案</span></a>
-        <a href="#budget"><i class="fas fa-calculator"></i><span>預算</span></a>
+        <a href="#local"><i class="fas fa-yen-sign"></i><span>花費</span></a>
         <a href="#konbini"><i class="fas fa-store"></i><span>超商</span></a>
     </nav>
 
@@ -513,6 +663,6 @@
         <p style="margin-top: 0.75rem;">© 2026 東京親子高 CP 值自由行指南. Designed for family of 4.</p>
     </footer>
 
-    <script src="app.js?v=2.3"></script>
+    <script src="app.js?v=2.4"></script>
 </body>
 </html>
