@@ -530,6 +530,7 @@ const contingencyData = [
             },
             {
                 title: "★想升級一餐時｜銀座鍋爸 → 澀谷 立喰鮨かきだ",
+                days: [2, 4],
                 trigger: "你們願意在花費上彈性一點，想把錢花在孩子真的會記得的一餐上。",
                 action: "把 Day 2 的銀座鍋爸整個取消，改成 **Day 4 傍晚在澀谷吃「立喰鮨かきだ」** ─ 就在**澀谷 Scramble Square 2F**，和 MEGA 唐吉訶德同一個路口，**動線完全不用改**。",
                 alts: [
@@ -629,6 +630,7 @@ const contingencyData = [
             },
             {
                 title: "回程當天（8/15）遇到颱風",
+                days: [5],
                 trigger: "最壞的情況：班機停飛，而飯店已經退房。",
                 action: "**先查捷星官網/APP 的異動公告再決定要不要去機場**，停飛時衝到機場只會在人潮裡耗掉體力。同時立刻打電話問飯店能不能延住一晚。",
                 alts: [
@@ -647,6 +649,7 @@ const contingencyData = [
         items: [
             {
                 title: "去程 GK012 延誤（8/11 凌晨）",
+                days: [1],
                 trigger: "起飛延後，抵達成田的時間往後推。",
                 action: "在機場就先用 LINE 通知飯店會晚到，並確認行李寄放服務的時間。Skyliner 若已購票，多數情況可改搭後面班次。",
                 alts: [
@@ -657,6 +660,7 @@ const contingencyData = [
             },
             {
                 title: "回程 GK011 延誤或取消（8/15 深夜）",
+                days: [5],
                 trigger: "最麻煩的情境：深夜、已退房、四個人加一堆行李。",
                 action: "**第一件事：向櫃檯索取「遲延証明書（遅延証明書）」。第二件事：一邊排隊改班機，一邊用手機訂成田周邊住宿** ─ 深夜房間會被同班旅客秒殺，動作要快。",
                 alts: [
@@ -667,6 +671,7 @@ const contingencyData = [
             },
             {
                 title: "回程行李超重（發生機率最高的一項）",
+                days: [5],
                 trigger: "唐吉訶德、DULTON、任天堂旗艦店買完後，行李幾乎一定會膨脹。",
                 action: "**行李箱裡先放一個可折疊旅行袋**，超重時當場把衣物移出來變成手提，這招最省錢也最快。",
                 alts: [
@@ -809,18 +814,58 @@ themeToggle.addEventListener('change', function() {
     localStorage.setItem('theme', theme);
 });
 
+// ---------- 每日進度：完成勾選與隱藏 ----------
+const actKey = (day, idx) => `done-d${day}-${idx}`;
+const isActDone = (day, idx) => localStorage.getItem(actKey(day, idx)) === 'true';
+
+// Plan B 對應到哪幾天：優先看 days 欄位，否則從標題的「Day N」推斷，都沒有就是全程適用
+function planBDaysOf(item) {
+    if (Array.isArray(item.days)) return item.days;
+    const found = item.title.match(/Day\s*(\d)/g);
+    return found ? found.map(s => parseInt(s.replace(/\D/g, ''), 10)) : null;
+}
+
+function planBForDay(dayNum) {
+    const result = [];
+    contingencyData.forEach(cat => {
+        cat.items.forEach(item => {
+            const days = planBDaysOf(item);
+            if (days && days.includes(dayNum)) result.push({ cat, item });
+        });
+    });
+    return result;
+}
+
 // Itinerary Rendering
 function renderItinerary(dayNum) {
     const dayData = itineraryData[dayNum];
     if (!dayData) return;
 
+    const total = dayData.activities.length;
+    const done = dayData.activities.filter((_, i) => isActDone(dayNum, i)).length;
+    const pct = total ? Math.round((done / total) * 100) : 0;
+
     let html = `
         <div class="day-overview">
             <h3 class="day-overview-title"><i class="fas fa-flag"></i> ${dayData.date} - ${dayData.title}</h3>
+            <div class="day-progress">
+                <div class="day-progress-top">
+                    <span id="day-progress-text">本日進度　${done} / ${total} 項</span>
+                    <span id="day-progress-pct">${pct}%</span>
+                </div>
+                <div class="day-progress-bar"><div class="day-progress-fill" style="width:${pct}%"></div></div>
+            </div>
+            <div class="day-tools">
+                <label class="day-tool-toggle">
+                    <input type="checkbox" id="hide-done-toggle"${localStorage.getItem('hide-done') === 'true' ? ' checked' : ''}>
+                    <span><i class="fas fa-eye-slash"></i> 隱藏已完成</span>
+                </label>
+                <button type="button" class="day-tool-btn" id="reset-day"><i class="fas fa-rotate-left"></i> 重設本日</button>
+            </div>
         </div>
     `;
 
-    dayData.activities.forEach((act) => {
+    dayData.activities.forEach((act, idx) => {
         const heatIcon = act.heatClass === 'danger' ? 'fa-temperature-high' : 'fa-snowflake';
         const heatTextClass = act.heatClass === 'danger' ? 'danger' : 'cool';
         
@@ -845,34 +890,46 @@ function renderItinerary(dayNum) {
             bodyHtml = `<p class="item-desc">${md(act.desc)}</p>`;
         }
         
+        const isDone = isActDone(dayNum, idx);
+        const isMove = act.title.includes('退房') || act.title.includes('機場') || act.title.includes('Skyliner')
+            || act.title.includes('寄存行李') || act.title.includes('早茶');
+
         html += `
-            <div class="timeline-item ${act.title.includes('退房') || act.title.includes('機場') || act.title.includes('Skyliner') || act.title.includes('寄存行李') || act.title.includes('設計感咖啡聽') || act.title.includes('早茶') ? 'lodging-move' : ''}">
+            <div class="timeline-item ${isMove ? 'lodging-move' : ''} ${isDone ? 'is-done' : ''}" data-act="${dayNum}-${idx}">
                 <div class="timeline-dot"></div>
                 <span class="item-time"><i class="far fa-clock"></i> ${act.time}</span>
                 <div class="item-card ${showAlternative ? 'alternative-active' : ''}">
                     <div class="item-title-row">
+                        <label class="act-check" title="完成後可收起">
+                            <input type="checkbox" data-done="${dayNum}-${idx}"${isDone ? ' checked' : ''}>
+                            <span class="act-check-box"><i class="fas fa-check"></i></span>
+                        </label>
                         <h4 class="item-title">${act.title}</h4>
                         <div class="item-badges">
                             <span class="cp-badge"><i class="fas fa-thumbs-up"></i> ${act.cp}</span>
                             <span class="heat-badge ${act.heatClass}"><i class="fas ${heatIcon}"></i> ${act.heat}</span>
                         </div>
                     </div>
-                    ${bodyHtml}
-                    
-                    <!-- Alternative / Backup Route -->
-                    <div class="item-alternative">
-                        <div class="alternative-title">
-                            <i class="fas fa-cloud-sun-rain"></i> ${act.altTitle}
-                        </div>
-                        <p class="alternative-desc">${md(act.altDesc)}</p>
-                    </div>
 
-                    <div class="item-details">
-                        <div class="detail-point">
-                            <i class="fas fa-route"></i> <strong>交通：</strong> ${act.transit}
+                    <div class="item-collapsible">
+                        ${bodyHtml}
+
+                        <button type="button" class="alt-toggle" data-alt="${dayNum}-${idx}">
+                            <i class="fas fa-cloud-sun-rain"></i> 這段的備案：${act.altTitle}
+                            <i class="fas fa-chevron-down alt-chevron"></i>
+                        </button>
+
+                        <div class="item-alternative">
+                            <p class="alternative-desc">${md(act.altDesc)}</p>
                         </div>
-                        <div class="detail-point">
-                            <i class="fas fa-yen-sign"></i> <strong>預估費用：</strong> ${act.cost}
+
+                        <div class="item-details">
+                            <div class="detail-point">
+                                <i class="fas fa-route"></i> <strong>交通：</strong> ${act.transit}
+                            </div>
+                            <div class="detail-point">
+                                <i class="fas fa-yen-sign"></i> <strong>預估費用：</strong> ${act.cost}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -880,7 +937,86 @@ function renderItinerary(dayNum) {
         `;
     });
 
+    // 本日相關的 Plan B（其餘全程適用的仍放在下方 Plan B 作戰室）
+    const dayPlanB = planBForDay(dayNum);
+    if (dayPlanB.length) {
+        html += `
+            <div class="day-planb">
+                <h4><i class="fas fa-shield-halved"></i> Day ${dayNum} 專屬備案（${dayPlanB.length} 項）</h4>
+                ${dayPlanB.map(({ cat, item }) => `
+                    <details class="day-planb-item">
+                        <summary>
+                            <i class="fas ${cat.icon}"></i>
+                            <span>${item.title}</span>
+                        </summary>
+                        <div class="day-planb-body">
+                            <div class="planb-row"><span class="planb-tag trigger">觸發</span><p>${md(item.trigger)}</p></div>
+                            <div class="planb-row"><span class="planb-tag action">立刻做</span><p>${md(item.action)}</p></div>
+                            <div class="planb-alts">
+                                <span class="planb-alts-title"><i class="fas fa-shuffle"></i> 替代方案</span>
+                                <ul>${item.alts.map(a => `<li>${md(a)}</li>`).join('')}</ul>
+                            </div>
+                        </div>
+                    </details>
+                `).join('')}
+                <p class="day-planb-more">
+                    颱風、中暑、預算超支等<strong>全程適用</strong>的備案，請見下方
+                    <a href="#planb">Plan B 備案作戰室</a>。
+                </p>
+            </div>
+        `;
+    }
+
     itineraryContent.innerHTML = html;
+    bindDayControls(dayNum);
+}
+
+// 綁定每日頁面的互動：完成勾選、隱藏已完成、重設、備案展開
+function bindDayControls(dayNum) {
+    itineraryContent.querySelectorAll('input[data-done]').forEach(box => {
+        box.addEventListener('change', function () {
+            const [d, i] = this.getAttribute('data-done').split('-');
+            localStorage.setItem(actKey(d, i), this.checked);
+            this.closest('.timeline-item').classList.toggle('is-done', this.checked);
+            updateDayProgress(dayNum);
+        });
+    });
+
+    itineraryContent.querySelectorAll('[data-alt]').forEach(btn => {
+        btn.addEventListener('click', function () {
+            this.closest('.item-card').classList.toggle('alt-open');
+        });
+    });
+
+    const hideToggle = document.getElementById('hide-done-toggle');
+    if (hideToggle) {
+        document.body.classList.toggle('hide-done', hideToggle.checked);
+        hideToggle.addEventListener('change', function () {
+            localStorage.setItem('hide-done', this.checked);
+            document.body.classList.toggle('hide-done', this.checked);
+        });
+    }
+
+    const resetBtn = document.getElementById('reset-day');
+    if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+            itineraryData[dayNum].activities.forEach((_, i) => localStorage.removeItem(actKey(dayNum, i)));
+            renderItinerary(dayNum);
+        });
+    }
+}
+
+function updateDayProgress(dayNum) {
+    const total = itineraryData[dayNum].activities.length;
+    const done = itineraryData[dayNum].activities.filter((_, i) => isActDone(dayNum, i)).length;
+    const pct = total ? Math.round((done / total) * 100) : 0;
+
+    const textEl = document.getElementById('day-progress-text');
+    const pctEl = document.getElementById('day-progress-pct');
+    const fillEl = document.querySelector('.day-progress-fill');
+    if (textEl) textEl.textContent = `本日進度　${done} / ${total} 項`;
+    if (pctEl) pctEl.textContent = `${pct}%`;
+    if (fillEl) fillEl.style.width = `${pct}%`;
 }
 
 // Tab Click Events

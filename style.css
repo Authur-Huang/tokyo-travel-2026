@@ -2148,6 +2148,317 @@ input:checked + .slider:before {
     font-weight: 600;
 }
 
+/* ============================================================
+   每日作戰頁：進度、完成勾選、隱藏已完成、行內備案、當日 Plan B
+   ============================================================ */
+
+/* --- 每日進度條與工具列 --- */
+.day-overview {
+    margin-bottom: 0.5rem;
+}
+
+.day-progress {
+    margin-top: 0.9rem;
+}
+
+.day-progress-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+}
+
+#day-progress-pct {
+    color: var(--success);
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+}
+
+.day-progress-bar {
+    height: 8px;
+    border-radius: 50px;
+    background: rgba(148, 163, 184, 0.18);
+    overflow: hidden;
+}
+
+.day-progress-fill {
+    height: 100%;
+    border-radius: 50px;
+    background: linear-gradient(90deg, var(--primary), var(--success));
+    transition: width 0.3s ease;
+}
+
+.day-tools {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-top: 0.8rem;
+}
+
+.day-tool-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+    user-select: none;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    background: rgba(148, 163, 184, 0.08);
+    border: 1px solid var(--border-card);
+    border-radius: 50px;
+    padding: 0.4rem 0.85rem;
+}
+
+.day-tool-toggle input {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--primary);
+    cursor: pointer;
+}
+
+.day-tool-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    background: transparent;
+    border: 1px solid var(--border-card);
+    border-radius: 50px;
+    padding: 0.4rem 0.85rem;
+    cursor: pointer;
+}
+
+.day-tool-btn:hover {
+    color: var(--danger);
+    border-color: rgba(239, 68, 68, 0.4);
+}
+
+/* --- 完成勾選 --- */
+.act-check {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 0.1rem;
+}
+
+.act-check input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.act-check-box {
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    border: 2px solid var(--tab-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: transparent;
+    font-size: 0.75rem;
+    transition: all 0.18s ease;
+}
+
+.act-check input:checked + .act-check-box {
+    background: var(--success);
+    border-color: var(--success);
+    color: #fff;
+}
+
+.item-title-row {
+    align-items: center;
+}
+
+/* --- 已完成：收成一行 --- */
+.timeline-item.is-done .item-collapsible {
+    display: none;
+}
+
+.timeline-item.is-done .item-card {
+    background: rgba(148, 163, 184, 0.02);
+    padding: 0.75rem 1rem;
+    opacity: 0.55;
+}
+
+.timeline-item.is-done .item-title {
+    text-decoration: line-through;
+    font-size: 0.95rem;
+}
+
+.timeline-item.is-done .item-badges {
+    display: none;
+}
+
+.timeline-item.is-done .timeline-dot {
+    background: var(--success);
+    box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.15);
+}
+
+.timeline-item.is-done .item-time {
+    opacity: 0.6;
+}
+
+body.hide-done .timeline-item.is-done {
+    display: none;
+}
+
+/* --- 行內備案展開 --- */
+.alt-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    text-align: left;
+    margin-top: 0.25rem;
+    padding: 0.7rem 0.9rem;
+    border: 1px dashed rgba(245, 158, 11, 0.45);
+    border-radius: 12px;
+    background: rgba(245, 158, 11, 0.06);
+    color: var(--accent);
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    font-weight: 700;
+    line-height: 1.45;
+    cursor: pointer;
+}
+
+.alt-chevron {
+    margin-left: auto;
+    flex-shrink: 0;
+    font-size: 0.7rem;
+    transition: transform 0.22s ease;
+}
+
+.alt-open .alt-chevron,
+.alternative-active .alt-chevron {
+    transform: rotate(180deg);
+}
+
+/* 備案內容：由行內按鈕或全域「雨天模式」任一開啟 */
+.item-alternative {
+    background: rgba(245, 158, 11, 0.06);
+    border: 1px dashed rgba(245, 158, 11, 0.3);
+    border-radius: 12px;
+    padding: 0.9rem;
+    margin-top: 0.5rem;
+    display: none;
+}
+
+.item-card.alt-open .item-alternative,
+.item-card.alternative-active .item-alternative {
+    display: block;
+    animation: fadeIn 0.25s ease;
+}
+
+/* --- 當日專屬 Plan B --- */
+.day-planb {
+    background: rgba(59, 130, 246, 0.04);
+    border: 1px solid rgba(59, 130, 246, 0.22);
+    border-radius: 16px;
+    padding: 1.25rem;
+    margin-top: 0.5rem;
+}
+
+.day-planb > h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.9rem;
+}
+
+.day-planb-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: 12px;
+    margin-bottom: 0.6rem;
+    overflow: hidden;
+}
+
+.day-planb-item summary {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.55rem;
+    padding: 0.8rem 0.95rem;
+    cursor: pointer;
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: var(--text-main);
+    line-height: 1.45;
+    list-style: none;
+}
+
+.day-planb-item summary::-webkit-details-marker {
+    display: none;
+}
+
+.day-planb-item summary i {
+    color: var(--accent);
+    margin-top: 3px;
+    flex-shrink: 0;
+}
+
+.day-planb-item summary::after {
+    content: "\f078";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    margin-left: auto;
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.day-planb-item[open] summary::after {
+    transform: rotate(180deg);
+}
+
+.day-planb-body {
+    padding: 0 0.95rem 0.95rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.day-planb-more {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+    margin-top: 0.75rem;
+}
+
+.day-planb-more a {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+@media (max-width: 576px) {
+    .day-tools {
+        gap: 0.45rem;
+    }
+    .day-tool-toggle,
+    .day-tool-btn {
+        font-size: 0.75rem;
+        padding: 0.35rem 0.7rem;
+    }
+    .item-title-row {
+        align-items: flex-start;
+    }
+}
+
 /* Horizontal Grid Layout for Reminders */
 .reminders-list-horizontal {
     display: grid;
