@@ -1076,6 +1076,71 @@ function renderPlanB() {
     });
 }
 
+// ============================================================
+// 手機閱讀優化：可收合區塊 / 旅程中自動置頂並跳到今天
+// ============================================================
+
+const MOBILE_BREAKPOINT = 992;
+const TRIP_DAYS = ['2026-08-11', '2026-08-12', '2026-08-13', '2026-08-14', '2026-08-15'];
+
+function localDateKey(d) {
+    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+}
+
+// 收合區塊：手機預設收合，桌機一律展開。使用者手動切換後記在 localStorage。
+function initCollapsibles() {
+    const isMobile = window.innerWidth <= MOBILE_BREAKPOINT;
+
+    document.querySelectorAll('.collapsible').forEach(section => {
+        const key = section.id;
+        const btn = section.querySelector(`[data-collapse="${key}"]`);
+        if (!btn) return;
+
+        const saved = localStorage.getItem(`collapse-${key}`);
+        const shouldCollapse = isMobile && (saved === null ? true : saved === 'true');
+        section.classList.toggle('collapsed', shouldCollapse);
+        syncCollapseBtn(btn, shouldCollapse);
+
+        btn.addEventListener('click', () => {
+            const nowCollapsed = section.classList.toggle('collapsed');
+            syncCollapseBtn(btn, nowCollapsed);
+            localStorage.setItem(`collapse-${key}`, nowCollapsed);
+        });
+    });
+}
+
+function syncCollapseBtn(btn, collapsed) {
+    btn.querySelector('span').textContent = collapsed ? '展開' : '收合';
+}
+
+// 旅程期間自動切到今天，並把每日行程移到最上面
+function initTripMode() {
+    const banner = document.getElementById('today-banner');
+    const todayIdx = TRIP_DAYS.indexOf(localDateKey(new Date()));
+
+    if (todayIdx === -1) {
+        // 尚未出發（或已回國）：維持原本順序，橫幅不顯示
+        return;
+    }
+
+    document.body.classList.add('trip-mode');
+    currentDay = todayIdx + 1;
+
+    tabButtons.forEach(btn => {
+        const isToday = btn.getAttribute('data-day') === String(currentDay);
+        btn.classList.toggle('active', isToday);
+        btn.classList.toggle('is-today', isToday);
+    });
+
+    renderItinerary(currentDay);
+
+    if (banner) {
+        const d = itineraryData[currentDay];
+        banner.innerHTML = `<i class="fas fa-location-dot"></i> 今天是 <strong>Day ${currentDay}（${d.date}）</strong> ─ 已自動為你切到今天的行程`;
+        banner.hidden = false;
+    }
+}
+
 // 緊急聯絡電話（使用者自行填入，存在本機）
 const emergencyFields = ['em-office', 'em-card', 'em-insurance'];
 
@@ -1121,4 +1186,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initEmergencyFields();
     updateCountdown();
     setInterval(updateCountdown, 30000); // 每 30 秒更新一次倒數
+
+    // 手機閱讀優化
+    initCollapsibles();
+    initTripMode();
 });

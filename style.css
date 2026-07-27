@@ -1762,6 +1762,161 @@ input:checked + .slider:before {
     .konbini-grid { grid-template-columns: 1fr; }
 }
 
+/* ============================================================
+   手機閱讀優化：可收合區塊 + 底部快速跳轉 + 旅程中自動置頂
+   ============================================================ */
+
+/* --- 可收合區塊 --- */
+.collapse-btn {
+    display: none; /* 桌機不需要，只在手機顯示 */
+    align-items: center;
+    gap: 0.35rem;
+    margin-left: auto;
+    padding: 0.35rem 0.8rem;
+    border: 1px solid var(--primary);
+    border-radius: 50px;
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--primary);
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.collapse-btn i {
+    font-size: 0.7rem;
+    transition: transform 0.25s ease;
+}
+
+.collapsible.collapsed .collapse-btn i {
+    transform: rotate(180deg);
+}
+
+.collapsible.collapsed .collapsible-body {
+    display: none;
+}
+
+/* 收合時給一句提示，讓人知道裡面還有東西 */
+.collapsed-hint {
+    display: none;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    background: rgba(148, 163, 184, 0.06);
+    border: 1px dashed var(--border-card);
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    margin-top: 0.75rem;
+    line-height: 1.5;
+}
+
+.collapsible.collapsed .collapsed-hint {
+    display: block;
+}
+
+/* --- 今天是第幾天 的橫幅（旅程期間才出現） --- */
+.today-banner {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(16, 185, 129, 0.15));
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 14px;
+    padding: 0.9rem 1.2rem;
+    margin-bottom: 1.25rem;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.today-banner i {
+    color: var(--success);
+}
+
+.tab-btn.is-today {
+    box-shadow: 0 0 0 2px var(--success);
+}
+
+/* --- 底部快速跳轉列（僅手機） --- */
+.mobile-quicknav {
+    display: none;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    background: var(--bg-card);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-top: 1px solid var(--border-card);
+    box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.18);
+    padding: 0.4rem 0.3rem calc(0.4rem + env(safe-area-inset-bottom));
+}
+
+.mobile-quicknav a {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.15rem;
+    padding: 0.45rem 0.2rem;
+    border-radius: 12px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.68rem;
+    font-weight: 700;
+}
+
+.mobile-quicknav a i {
+    font-size: 1.05rem;
+}
+
+.mobile-quicknav a.qn-primary {
+    color: var(--primary);
+    background: rgba(59, 130, 246, 0.12);
+}
+
+@media (max-width: 992px) {
+    .mobile-quicknav {
+        display: flex;
+    }
+
+    /* 避免最後一段內容被固定列蓋住 */
+    body {
+        padding-bottom: 5.5rem;
+    }
+
+    .collapse-btn {
+        display: inline-flex;
+    }
+
+    .prep-header h2,
+    .reminders-section > h2 {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    /* 手機為單欄，用 order 控制閱讀順序 */
+    .prep-section      { order: 1; }
+    .overview-section  { order: 2; }
+    .reminders-section { order: 3; }
+    .itinerary-section { order: 4; }
+    .contingency-section { order: 5; }
+    .budget-section    { order: 6; }
+    .checklist-section { order: 7; }
+    .konbini-section   { order: 8; }
+
+    /* 旅程期間（8/11-8/15）：每日行程與超商清單自動移到最前面 */
+    body.trip-mode .itinerary-section { order: 0; }
+    body.trip-mode .konbini-section   { order: 1; }
+    body.trip-mode .contingency-section { order: 2; }
+    body.trip-mode .overview-section  { order: 3; }
+    body.trip-mode .prep-section      { order: 7; }
+    body.trip-mode .reminders-section { order: 8; }
+}
+
 /* Horizontal Grid Layout for Reminders */
 .reminders-list-horizontal {
     display: grid;

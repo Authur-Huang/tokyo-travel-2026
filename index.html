@@ -14,7 +14,7 @@
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- 樣式表同樣加上版本參數排除快取，否則家人手機上的舊 CSS 會讓新版面錯位 -->
-    <link rel="stylesheet" href="style.css?v=2.1">
+    <link rel="stylesheet" href="style.css?v=2.2">
 </head>
 <body>
     <!-- Theme Toggle -->
@@ -56,10 +56,12 @@
     <!-- Main Container -->
     <main class="main-container">
         <!-- Pre-trip Preparation Cockpit (行前準備駕駛艙 / v1.8) -->
-        <section class="prep-section card">
+        <section class="prep-section card collapsible" id="prep">
             <div class="prep-header">
                 <div class="prep-header-text">
-                    <h2><i class="fas fa-clipboard-check"></i> 行前準備駕駛艙</h2>
+                    <h2><i class="fas fa-clipboard-check"></i> 行前準備駕駛艙
+                        <button class="collapse-btn" type="button" data-collapse="prep"><i class="fas fa-chevron-up"></i><span>收合</span></button>
+                    </h2>
                     <p class="section-desc">依「距離出發還剩幾天」分成 5 個階段。勾選會自動記憶在這台裝置上，全家可以照著同一份清單推進。</p>
                 </div>
                 <div class="countdown-box">
@@ -77,6 +79,11 @@
                 <div class="prep-progress-bar"><div class="prep-progress-fill" id="prep-progress-fill"></div></div>
             </div>
 
+            <div class="collapsed-hint">
+                <i class="fas fa-hand-pointer"></i> 裡面有 <strong>5 階段 26 項待辦清單</strong>與<strong>緊急聯絡 SOP</strong>。上方進度條會持續顯示完成度，需要時按右上角「展開」即可。
+            </div>
+
+            <div class="collapsible-body">
             <div class="prep-grid" id="prep-checklist">
                 <!-- Dynamically populated by app.js -->
             </div>
@@ -122,6 +129,7 @@
                     </div>
                 </div>
             </div>
+            </div><!-- /.collapsible-body -->
         </section>
 
         <!-- Sidebar Quick Navigation & Stats -->
@@ -161,9 +169,14 @@
         </section>
 
         <!-- Pre-trip Important Reminders Section -->
-        <section class="reminders-section card" style="margin-top: 2rem;">
-            <h2><i class="fas fa-exclamation-circle"></i> 行前必看！重要準備與提醒</h2>
-            <div class="survival-guide-container" style="margin-top: 1.25rem;">
+        <section class="reminders-section card collapsible" id="reminders" style="margin-top: 2rem;">
+            <h2><i class="fas fa-exclamation-circle"></i> 行前必看！重要準備與提醒
+                <button class="collapse-btn" type="button" data-collapse="reminders"><i class="fas fa-chevron-up"></i><span>收合</span></button>
+            </h2>
+            <div class="collapsed-hint">
+                <i class="fas fa-hand-pointer"></i> 裡面有<strong>提款與花費、三支手機網路規劃、凌晨機場接送、必買必吃</strong>四張卡。按右上角「展開」查看。
+            </div>
+            <div class="survival-guide-container collapsible-body" style="margin-top: 1.25rem;">
                 <div class="survival-item">
                     <div class="survival-icon" style="background: rgba(245, 158, 11, 0.1); color: var(--accent);"><i class="fas fa-wallet"></i></div>
                     <div class="survival-text">
@@ -213,7 +226,8 @@
         </section>
 
         <!-- Itinerary Section -->
-        <section class="itinerary-section card">
+        <section class="itinerary-section card" id="itinerary">
+            <div id="today-banner" class="today-banner" hidden></div>
             <div class="itinerary-header">
                 <h2><i class="fas fa-calendar-alt"></i> 每日詳細行程</h2>
                 <div class="route-toggle-wrapper">
@@ -257,7 +271,7 @@
         </section>
 
         <!-- Plan B Contingency War Room (備案作戰室 / v1.9) -->
-        <section class="contingency-section card">
+        <section class="contingency-section card" id="planb">
             <h2><i class="fas fa-shield-halved"></i> Plan B 備案作戰室</h2>
             <p class="section-desc">當初點出的每個風險，這裡都給出「觸發條件 → 立刻做什麼 → 換去哪裡」。出發前全家看一遍，現場才不會慌。</p>
 
@@ -273,7 +287,7 @@
         </section>
 
         <!-- Budget Planner Section -->
-        <section class="budget-section card">
+        <section class="budget-section card" id="budget">
             <h2><i class="fas fa-calculator"></i> 親子高 CP 值預算計算器</h2>
             <p class="section-desc">已為您預填 4 人 (2大2小) 的估計花費 (單位：新台幣 NTD)。您可以隨時修改數值以符合您的預算！</p>
             
@@ -478,12 +492,21 @@
         </section>
     </main>
 
+    <!-- Sticky quick navigation (mobile only) -->
+    <nav class="mobile-quicknav" aria-label="快速跳轉">
+        <a href="#prep"><i class="fas fa-clipboard-check"></i><span>行前</span></a>
+        <a href="#itinerary" class="qn-primary"><i class="fas fa-calendar-alt"></i><span>行程</span></a>
+        <a href="#planb"><i class="fas fa-shield-halved"></i><span>備案</span></a>
+        <a href="#budget"><i class="fas fa-calculator"></i><span>預算</span></a>
+        <a href="#konbini"><i class="fas fa-store"></i><span>超商</span></a>
+    </nav>
+
     <!-- Footer -->
     <footer class="main-footer">
         <p><a class="footer-link" href="refs.html"><i class="fas fa-film"></i> 參考影片存放區（IG 美食影片整理）</a></p>
         <p style="margin-top: 0.75rem;">© 2026 東京親子高 CP 值自由行指南. Designed for family of 4.</p>
     </footer>
 
-    <script src="app.js?v=2.0"></script>
+    <script src="app.js?v=2.2"></script>
 </body>
 </html>
