@@ -925,8 +925,8 @@ function calculateBudget() {
     const foodPerPersonPerDay = food / 4 / 5;
     if (foodPerPersonPerDay < 1000) {
         advice += `⚠️ 餐飲預算換算後為每人每天約 NT$${Math.round(foodPerPersonPerDay)}（約 ¥${Math.round(foodPerPersonPerDay * 4.8)}）。但 Day 2 銀座鍋爸吃到飽單餐就要 ¥3,500~5,000/人，那天勢必超支。建議把餐飲拉到 NT$22,000 以上，或將鍋爸改為備案的三越美食街。`;
-    } else if (transport > 4500) {
-        advice += "💡 您的交通預算偏高，建議善用東京地鐵 72 小時券 (大人只需 ¥1,500/約 NT$320)，因為兩位孩子皆為國高中生，皆適用成人票價，因此使用 72 小時地鐵券更是劃算！";
+    } else if (transport > 8000) {
+        advice += "💡 交通預算偏高。預設的 NT$5,600 已包含「Skyliner 往復 + 地鐵 72 小時券」套票（¥6,100/人）加上 Suica 加值。若想再省，可把機場往返改成 Access 特急，4 人約可省 NT$1,900，代價是單程多 20 分鐘且沒有對號座。";
     } else if (tickets > 8000) {
         advice += "💡 門票預算稍高。本行程精選了免門票的明治神宮、東京鐵塔外拍與各大商場，真正要付費的只有 RED° 一項。建議多利用免費景點來維持高 CP 值。";
     } else if (esim > 2500) {
