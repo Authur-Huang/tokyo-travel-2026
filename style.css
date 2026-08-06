@@ -994,6 +994,23 @@ input:checked + .slider:before {
     color: var(--accent);
 }
 
+/* 手機編組提醒：四人只有三支手機，每個分流段落都固定顯示一次 */
+.phone-rule {
+    margin-top: 0.5rem;
+    background: rgba(239, 68, 68, 0.05);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-left: 4px solid #ef4444;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.phone-rule i {
+    color: #ef4444;
+}
+
 @media (max-width: 768px) {
     .split-route-container {
         grid-template-columns: 1fr;
