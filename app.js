@@ -994,7 +994,7 @@ function bindDayControls(dayNum) {
     itineraryContent.querySelectorAll('input[data-done]').forEach(box => {
         box.addEventListener('change', function () {
             const [d, i] = this.getAttribute('data-done').split('-');
-            localStorage.setItem(actKey(d, i), this.checked);
+            TripSync.set(actKey(d, i), this.checked);
             this.closest('.timeline-item').classList.toggle('is-done', this.checked);
             updateDayProgress(dayNum);
         });
@@ -1018,7 +1018,8 @@ function bindDayControls(dayNum) {
     const resetBtn = document.getElementById('reset-day');
     if (resetBtn) {
         resetBtn.addEventListener('click', () => {
-            itineraryData[dayNum].activities.forEach((_, i) => localStorage.removeItem(actKey(dayNum, i)));
+            // 寫 'false' 而不是 removeItem —— 刪除不會同步出去，其他人的手機會以為還是勾著的
+            itineraryData[dayNum].activities.forEach((_, i) => TripSync.set(actKey(dayNum, i), 'false'));
             renderItinerary(dayNum);
         });
     }
@@ -1095,8 +1096,21 @@ function calculateBudget() {
 }
 
 [bgEsim, bgFood, bgTickets, bgTransport, bgShopping].forEach(input => {
-    input.addEventListener('input', calculateBudget);
+    input.addEventListener('input', function () {
+        calculateBudget();
+        TripSync.set(this.id, this.value);
+    });
 });
+
+// 預算數字原本只存在記憶體，重新整理就回到預設值。改為存本機並納入同步，
+// 讓爸媽在各自手機上調整的金額是同一份。
+function initBudgetInputs() {
+    [bgEsim, bgFood, bgTickets, bgTransport, bgShopping].forEach(input => {
+        const saved = localStorage.getItem(input.id);
+        if (saved !== null && saved !== '') input.value = saved;
+    });
+    calculateBudget();
+}
 
 // ============================================================
 // 行前準備駕駛艙：倒數計時 + 分階段互動清單 + 緊急聯絡欄位
@@ -1162,7 +1176,7 @@ function renderPrepChecklist() {
     container.querySelectorAll('input[data-prep]').forEach(box => {
         box.checked = localStorage.getItem(box.id) === 'true';
         box.addEventListener('change', function () {
-            localStorage.setItem(this.id, this.checked);
+            TripSync.set(this.id, this.checked);
             updatePrepProgress();
         });
     });
@@ -1304,7 +1318,7 @@ function initEmergencyFields() {
         if (!input) return;
         input.value = localStorage.getItem(id) || '';
         input.addEventListener('input', function () {
-            localStorage.setItem(id, this.value);
+            TripSync.set(id, this.value);
         });
     });
 }
@@ -1321,17 +1335,183 @@ function initChecklist() {
             const isChecked = localStorage.getItem(item) === 'true';
             checkbox.checked = isChecked;
             checkbox.addEventListener('change', function() {
-                localStorage.setItem(item, this.checked);
+                TripSync.set(item, this.checked);
             });
         }
     });
 }
 
+// ============================================================
+// 家人手機之間的狀態同步（Supabase）
+//
+// 設計原則：localStorage 永遠是主，雲端只是疊加層。
+// 沒訊號、Supabase 被暫停、金鑰失效 —— 一律安靜退回單機模式：
+// 清單照樣勾、頁面照樣看，只是不同步而已。任何網路錯誤都不准
+// 讓畫面壞掉或卡住，因為這頁在日本是要當工具用的。
+// ============================================================
+const SYNC_PREFIXES = ['prep-', 'pack-', 'done-d', 'em-', 'bg-'];
+const isSyncable = k => !!k && SYNC_PREFIXES.some(p => k.startsWith(p));
+
+const TripSync = {
+    // 這把是 publishable key，本來就設計成可以公開在前端。
+    // 真正的防線是資料庫的 RLS：只開放 trip_state 這一張表的 tokyo2026 這一間，
+    // 且沒有刪除權限。
+    url: 'https://tbggtfwycwjgykkbtkef.supabase.co',
+    apiKey: 'sb_publishable_f0N0ZAl0yYGRub8u5rOw3Q_d-vGmRQX',
+    room: 'tokyo2026',
+    pollMs: 15000,
+    cursorKey: '__sync_cursor',
+
+    state: 'connecting',   // connecting | ok | off
+    cursor: null,
+    pending: new Map(),
+    flushTimer: null,
+
+    async init() {
+        if (!this.url || !this.apiKey) return;
+        this.cursor = localStorage.getItem(this.cursorKey) || null;
+        this.renderBadge();
+
+        await this.pull(true);
+        setInterval(() => this.pull(false), this.pollMs);
+
+        // 從背景切回前景時立刻補拉一次，不必等下一個輪詢
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) this.pull(false);
+        });
+        window.addEventListener('online', () => this.pull(false));
+    },
+
+    headers(extra) {
+        return Object.assign({
+            'apikey': this.apiKey,
+            'Authorization': `Bearer ${this.apiKey}`,
+            'Content-Type': 'application/json'
+        }, extra || {});
+    },
+
+    // 對外的唯一寫入入口：先寫本機（保證成功），再排隊推上雲端
+    set(key, value) {
+        const v = String(value);
+        localStorage.setItem(key, v);
+        if (!isSyncable(key)) return;
+        this.pending.set(key, v);
+        clearTimeout(this.flushTimer);
+        this.flushTimer = setTimeout(() => this.flush(), 400);  // 連續輸入時合併成一次
+    },
+
+    async flush() {
+        if (!this.pending.size) return;
+        const rows = [...this.pending.entries()].map(([key, value]) => ({ room: this.room, key, value }));
+        this.pending.clear();
+        try {
+            const res = await fetch(`${this.url}/rest/v1/trip_state?on_conflict=room,key`, {
+                method: 'POST',
+                headers: this.headers({ 'Prefer': 'resolution=merge-duplicates,return=minimal' }),
+                body: JSON.stringify(rows)
+            });
+            if (!res.ok) throw new Error(res.status);
+            this.setState('ok');
+        } catch (e) {
+            // 推失敗就放回佇列，下次輪詢再試。本機資料已經寫好了，不會掉。
+            rows.forEach(r => { if (!this.pending.has(r.key)) this.pending.set(r.key, r.value); });
+            this.setState('off');
+        }
+    },
+
+    async pull(isFirst) {
+        try {
+            let u = `${this.url}/rest/v1/trip_state?select=key,value,updated_at&room=eq.${this.room}`;
+            if (!isFirst && this.cursor) u += `&updated_at=gt.${encodeURIComponent(this.cursor)}`;
+
+            const res = await fetch(u, { headers: this.headers(), cache: 'no-store' });
+            if (!res.ok) throw new Error(res.status);
+            const rows = await res.json();
+            this.setState('ok');
+
+            rows.forEach(r => {
+                if (localStorage.getItem(r.key) !== r.value) this.applyRemote(r.key, r.value);
+                if (!this.cursor || r.updated_at > this.cursor) {
+                    this.cursor = r.updated_at;
+                    localStorage.setItem(this.cursorKey, this.cursor);
+                }
+            });
+
+            // 第一次連上時，把「這支手機有、雲端還沒有」的項目補推上去，
+            // 免得先前單機勾好的東西被當成沒勾過。
+            if (isFirst) this.pushLocalOnly(rows.map(r => r.key));
+            if (this.pending.size) this.flush();
+        } catch (e) {
+            this.setState('off');
+        }
+    },
+
+    pushLocalOnly(remoteKeys) {
+        const remote = new Set(remoteKeys);
+        for (let i = 0; i < localStorage.length; i++) {
+            const k = localStorage.key(i);
+            if (!isSyncable(k) || remote.has(k)) continue;
+            const v = localStorage.getItem(k);
+            if (v !== null && v !== '' && v !== 'false') this.pending.set(k, v);
+        }
+    },
+
+    // 把雲端來的值寫進本機並反映到畫面上
+    applyRemote(key, value) {
+        localStorage.setItem(key, value);
+
+        const day = key.match(/^done-d(\d+)-(\d+)$/);
+        if (day) {
+            const el = itineraryContent.querySelector(`input[data-done="${day[1]}-${day[2]}"]`);
+            if (el) {                                   // 只有正在看的那一天才需要動 DOM，
+                el.checked = (value === 'true');        // 其他天切過去時會自己從 localStorage 重畫
+                const item = el.closest('.timeline-item');
+                if (item) item.classList.toggle('is-done', el.checked);
+                updateDayProgress(Number(day[1]));
+            }
+            return;
+        }
+
+        const el = document.getElementById(key);
+        if (!el) return;
+        if (el.type === 'checkbox') {
+            el.checked = (value === 'true');
+            if (key.startsWith('prep-')) updatePrepProgress();
+        } else {
+            el.value = value;
+            if (key.startsWith('bg-')) calculateBudget();
+        }
+    },
+
+    setState(s) {
+        if (this.state === s) return;
+        this.state = s;
+        this.renderBadge();
+    },
+
+    renderBadge() {
+        let el = document.getElementById('sync-badge');
+        if (!el) {
+            el = document.createElement('div');
+            el.id = 'sync-badge';
+            document.body.appendChild(el);
+        }
+        const map = {
+            connecting: ['sync-connecting', '<i class="fas fa-circle-notch fa-spin"></i> 連線中'],
+            ok:         ['sync-ok',         '<i class="fas fa-cloud"></i> 全家同步中'],
+            off:        ['sync-off',        '<i class="fas fa-plug-circle-xmark"></i> 離線 ─ 只存這支手機']
+        };
+        const [cls, html] = map[this.state] || map.off;
+        el.className = cls;
+        el.innerHTML = html;
+    }
+};
+
 // Initializer
 document.addEventListener('DOMContentLoaded', () => {
     initTheme();
     renderItinerary(currentDay);
-    calculateBudget();
+    initBudgetInputs();
     initChecklist();
 
     // 行前準備駕駛艙
@@ -1344,4 +1524,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // 手機閱讀優化
     initCollapsibles();
     initTripMode();
+
+    // 家人手機之間的同步：一定放在所有畫面都畫好之後，
+    // 這樣雲端拉回來的值才有 DOM 可以套用。連不上也只是安靜退回單機模式。
+    TripSync.init();
 });
